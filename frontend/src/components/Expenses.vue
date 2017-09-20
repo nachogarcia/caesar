@@ -37,15 +37,13 @@
 
 <script>
   import * as Vuex from 'vuex';
+
   export default {
     name: 'Expenses',
     data: () => ({
       filter: null,
+
       fields: {
-        id: {
-          label: 'ID',
-          sortable: false,
-        },
         date: {
           label: 'Date',
           sortable: true,
