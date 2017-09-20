@@ -18,7 +18,7 @@
         :filter="filter"
         :sort-by="date"
         :sort-desc=true
-        @row-clicked="selectExpense(item)"
+        @row-clicked="selectExpense"
       >
         <template slot="status" scope="data">{{data.item.state}} {{data.item.modified_by_reviewer}}</template>
       </b-table>
@@ -58,7 +58,7 @@
 
       selectExpense (expense) {
         this.$store.commit('expense', expense);
-        //this.$router.push('site');
+        this.$router.push('expense');
       },
     },
 
