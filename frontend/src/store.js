@@ -70,18 +70,18 @@ const actions = {
       },
       {
         id: 'a3',
-        name: 'Company2',
+        name: 'Bad Company2',
         description: 'Work for the Company2 service',
         activitytype: 'Hourly',
         is_billable: true
       },
       {
         id: 'a4',
-        name: 'Company4',
+        name: 'Good Company3',
         description: '',
         activitytype: 'Daily',
         is_billable: true
-      }
+      },
     ]
     commit('activities', activities)
   },
@@ -154,22 +154,12 @@ const actions = {
   }
 }
 
-const aggregateSubmissions = (state) => state.expenseSubmissions.map(expenseSubmissionData => {
-  let { user_id, ...submission } = expenseSubmissionData
-  submission.user = state.users.find(element => element.id === user_id)
-
-  submission.expenses = submission.expenses.map(expenseData => {
-    let { activity_id, ...expense } = expenseData
-    expense.activity = state.activities.find(element => element.id === activity_id)
-    return expense
-  })
-
-  return submission
-})
-
 const getters = {
-  expenseSubmissions: state => aggregateSubmissions(state),
-  expenseSubmission: state => state.expenseSubmission
+  expenseSubmissions: state => state.expenseSubmissions,
+  expenseSubmission: state => state.expenseSubmission,
+  activity: state => id => state.activities.find(element => element.id === id),
+  activities: state => state.activities,
+  user: state => id => state.users.find(element => element.id === id)
 }
 
 export default new Vuex.Store({

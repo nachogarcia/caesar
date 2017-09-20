@@ -21,15 +21,15 @@
         @row-clicked="selectExpense"
       >
         <template slot="craftsperson" scope="data">
-          {{data.item.user.name}}
+          {{user(data.item.user_id).name}}
         </template>
         <template slot="status" scope="data">
           <b-row>
             <b-col>
-              <b-badge :variant="stateVariant[data.item.state]">{{data.item.state}}</b-badge>
+              <b-badge :variant="getStateVariant(data.item.state)">{{data.item.state}}</b-badge>
             </b-col>
             <b-col>
-              <b-badge v-if="data.item.modified_by_reviewer" variant="danger">Modified by reviewer</b-badge>
+            <b-badge v-if="data.item.modified_by_reviewer" variant="danger">Modified by reviewer</b-badge>
             </b-col>
           </b-row>
         </template>
@@ -40,6 +40,7 @@
 
 <script>
   import * as Vuex from 'vuex';
+  import stateVariant from '@/stateVariant';
 
   export default {
     name: 'ExpenseSubmissions',
@@ -63,21 +64,18 @@
           label: 'Status',
         },
       },
-
-      stateVariant : {
-        'submitted': 'primary',
-        'reviewed': 'info',
-        'saved': 'default',
-        'payed': 'success'
-      }
     }),
 
     computed: {
-      ...Vuex.mapGetters(['expenseSubmissions']),
+      ...Vuex.mapGetters(['expenseSubmissions', 'user']),
     },
 
     methods: {
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
+
+      getStateVariant(state){
+        return stateVariant[state]
+      },
 
       selectExpense (expense) {
         this.$store.commit('expenseSubmission', expense);
