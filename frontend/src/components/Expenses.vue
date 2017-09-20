@@ -20,7 +20,16 @@
         :sort-desc=true
         @row-clicked="selectExpense"
       >
-        <template slot="status" scope="data">{{data.item.state}} {{data.item.modified_by_reviewer}}</template>
+        <template slot="status" scope="data">
+          <b-row>
+            <b-col>
+              <b-badge :variant="stateVariant[data.item.state]">{{data.item.state}}</b-badge>
+            </b-col>
+            <b-col>
+              <b-badge v-if="data.item.modified_by_reviewer" variant="danger">Modified by reviewer</b-badge>
+            </b-col>
+          </b-row>
+        </template>
       </b-table>
     </b-row>
   </b-container>
@@ -49,10 +58,19 @@
           label: 'Status',
         },
       },
+
+      stateVariant : {
+        'submitted': 'primary',
+        'reviewed': 'info',
+        'saved': 'default',
+        'payed': 'success'
+      }
     }),
+
     computed: {
       ...Vuex.mapGetters(['expenses']),
     },
+
     methods: {
       ...Vuex.mapActions(['updateExpenses']),
 
