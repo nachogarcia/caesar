@@ -20,6 +20,9 @@
         :sort-desc=true
         @row-clicked="selectExpense"
       >
+        <template slot="craftsperson" scope="data">
+          {{data.item.user.name}}
+        </template>
         <template slot="status" scope="data">
           <b-row>
             <b-col>
@@ -44,6 +47,10 @@
       filter: null,
 
       fields: {
+        craftsperson: {
+          label: 'Craftsperson',
+          sortable: true,
+        },
         date: {
           label: 'Date',
           sortable: true,
