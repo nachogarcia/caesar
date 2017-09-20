@@ -13,10 +13,10 @@
         hover
         responsive
         bordered
-        :items="expenses"
+        :items="expenseSubmissions"
         :fields="fields"
         :filter="filter"
-        :sort-by="date"
+        :sort-by="'date'"
         :sort-desc=true
         @row-clicked="selectExpense"
       >
@@ -39,7 +39,7 @@
   import * as Vuex from 'vuex';
 
   export default {
-    name: 'Expenses',
+    name: 'ExpenseSubmissions',
     data: () => ({
       filter: null,
 
@@ -66,20 +66,22 @@
     }),
 
     computed: {
-      ...Vuex.mapGetters(['expenses']),
+      ...Vuex.mapGetters(['expenseSubmissions']),
     },
 
     methods: {
-      ...Vuex.mapActions(['updateExpenses']),
+      ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
 
       selectExpense (expense) {
-        this.$store.commit('expense', expense);
-        this.$router.push('expense');
+        this.$store.commit('expenseSubmission', expense);
+        this.$router.push('expenseSubmission');
       },
     },
 
     created () {
-      this.updateExpenses()
+      this.updateUsers()
+      this.updateActivities()
+      this.updateExpenseSubmissions()
     }
   }
 </script>

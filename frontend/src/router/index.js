@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Expenses from '@/components/Expenses'
-import Expense from '@/components/Expense'
+import ExpenseSubmissions from '@/components/ExpenseSubmissions'
+import ExpenseSubmission from '@/components/ExpenseSubmission'
 
 Vue.use(Router)
 
@@ -9,12 +9,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Expenses',
-      component: Expenses
+      name: 'ExpenseSubmissions',
+      component: ExpenseSubmissions
     },
     {
-      path: '/expense',
-      component: Expense
+      path: '/ExpenseSubmission',
+      component: ExpenseSubmission
     }
   ]
 })

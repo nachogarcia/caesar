@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    {{expense}}
+    {{expenseSubmission}}
   </b-container>
 </template>
 
@@ -8,10 +8,10 @@
   import * as Vuex from 'vuex';
 
   export default {
-    name: 'Expenses',
+    name: 'ExpenseSubmission',
     data: () => ({}),
     computed: {
-      ...Vuex.mapGetters(['expense']),
+      ...Vuex.mapGetters(['expenseSubmission']),
     },
     methods: {}
   }
