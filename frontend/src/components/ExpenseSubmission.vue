@@ -9,6 +9,7 @@
               label="Concept" label-for="expenseSubmissionConcept"
             >
               <b-form-input
+                required
                 id="expenseSubmissionConcept"
                 v-model="expenseSubmission.concept"
                 placeholder="Concept of the expense submission"
@@ -24,6 +25,7 @@
               label="Date" label-for="expenseSubmissionDate"
             >
               <b-form-input
+                required
                 id="expenseSubmissionDate"
                 v-model="expenseSubmission.date"
                 type="date"
@@ -40,58 +42,67 @@
       </b-form-row>
 
       <h2>Expenses</h2>
-      <div v-for="expense in expenseSubmission.expenses">
-        <b-form-row>
-          <b-col>
-            <b-form-group
-              horizontal
-              id="expenseConceptGroup"
-              label="Concept" label-for="expenseConcept"
-            >
-              <b-form-input
-                id="expenseConcept"
-                v-model="expense.concept"
-                placeholder="Concept of the expense"
-              />
-            </b-form-group>
+      <b-card-group columns>
+        <b-card v-for="expense in expenseSubmission.expenses">
+          <b-form-row>
+            <b-col>
+              <b-form-group
+                horizontal
+                id="expenseConceptGroup"
+                label="Concept" label-for="expenseConcept"
+              >
+                <b-form-input
+                  required
+                  id="expenseConcept"
+                  v-model="expense.concept"
+                  placeholder="Concept of the expense"
+                />
+              </b-form-group>
 
-            <b-form-group
-              horizontal
-              id="expenseDateGroup"
-              label="Date" label-for="expenseDate"
-            >
-              <b-form-input
-                id="expenseDate"
-                v-model="expense.date"
-                type="date"
-              />
-            </b-form-group>
-          </b-col>
-        </b-form-row>
+              <b-form-group
+                horizontal
+                id="expenseDateGroup"
+                label="Date" label-for="expenseDate"
+              >
+                <b-form-input
+                  required
+                  id="expenseDate"
+                  v-model="expense.date"
+                  type="date"
+                />
+              </b-form-group>
+            </b-col>
+          </b-form-row>
 
-        <b-form-row>
-          <b-col>
-            <b-form-group
-              horizontal
-              id="expenseActivityGroup"
-              label="Activity" label-for="expenseActivity"
-            >
-              <b-form-select
-                id="expenseActivity"
-                v-model="expense.activity_id"
-                :options="activities"
-                class="mb-3"
-                text-field="name"
-                value-field="id"
-              />
-            </b-form-group>
+          <b-form-row>
+            <b-col>
+              <b-form-group
+                horizontal
+                id="expenseActivityGroup"
+                label="Activity" label-for="expenseActivity"
+              >
+                <b-form-select
+                  required
+                  id="expenseActivity"
+                  v-model="expense.activity_id"
+                  :options="activities"
+                  class="mb-3"
+                  text-field="name"
+                  value-field="id"
+                />
+              </b-form-group>
 
-            <b-badge v-if="activity(expense.activity_id).is_billable" variant="success">Billable</b-badge>
-            <b-badge v-else variant="secondary">Not Billable</b-badge>
-          </b-col>
-        </b-form-row>
-        <hr />
-      </div>
+              <b-badge v-if="activity(expense.activity_id).is_billable" variant="success">Billable</b-badge>
+              <b-badge v-else variant="secondary">Not Billable</b-badge>
+            </b-col>
+          </b-form-row>
+        </b-card>
+      </b-card-group>
+      <b-button
+        variant="primary"
+        @click="expenseSubmission.expenses.push({})">
+        Add Expense
+      </b-button>
 
       <b-form-row>
         <b-button type="submit" variant="primary">Submit</b-button>
