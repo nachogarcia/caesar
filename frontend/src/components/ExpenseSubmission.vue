@@ -156,7 +156,8 @@
         <b-col cols="2">
           <b-button
             variant="primary"
-            @click="addExpense">
+            v-b-modal.addExpenseModal
+          >
             + Add Expense
           </b-button>
         </b-col>
@@ -178,15 +179,20 @@
         </b-col>
       </b-row>
     </b-form>
+
+    <AddExpenseModal />
   </b-container>
 </template>
 
 <script>
   import * as Vuex from 'vuex'
   import stateVariant from '@/stateVariant'
+  import AddExpenseModal from '@/components/AddExpenseModal'
 
   export default {
     name: 'ExpenseSubmission',
+
+    components: { 'AddExpenseModal': AddExpenseModal },
 
     computed: {
       ...Vuex.mapGetters(['expenseSubmission', 'activities']),
@@ -209,7 +215,7 @@
       },
 
       addExpense () {
-        Promise.resolve(this.expenseSubmission.expenses.push({})).then( () => {
+        Promise.resolve(this.expenseSubmission.expenses.push(new Expense())).then( () => {
           window.scrollTo(0,document.body.scrollHeight)
         })
       },
