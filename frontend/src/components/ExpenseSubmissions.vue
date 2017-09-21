@@ -12,6 +12,7 @@
         striped
         hover
         responsive
+        small
         bordered
         :items="expenseSubmissions"
         :fields="fields"
@@ -29,7 +30,7 @@
               <b-badge :variant="getStateVariant(data.item.state)">{{data.item.state}}</b-badge>
             </b-col>
             <b-col>
-            <b-badge v-if="data.item.modified_by_reviewer" variant="danger">Modified by reviewer</b-badge>
+              <b-badge v-if="data.item.modified_by_reviewer" variant="danger">Modified by reviewer</b-badge>
             </b-col>
           </b-row>
         </template>
