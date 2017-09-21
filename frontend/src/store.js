@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import getActivities from '@/APICalls/Activity'
+import getUsers from '@/APICalls/User'
+import getExpenseSubmissions from '@/APICalls/ExpenseSubmission'
 
 Vue.use(Vuex)
 
@@ -26,130 +29,18 @@ const mutations = {
 }
 
 const actions = {
-  updateUsers ({ commit, state }) {
-    // here will be the API call
-    const users = [
-      {
-        id: 'u1',
-        name: 'User1',
-        role: ['Apprentice'],
-        active: true
-      },
-      {
-        id: 'u2',
-        name: 'User2',
-        role: ['Craftsman', 'Head of something'],
-        active: true
-      },
-      {
-        id: 'u3',
-        name: 'User3',
-        role: ['craftsman'],
-        active: false
-      }
-    ]
+  async updateUsers ({ commit, state }) {
+    const users = await getUsers()
     commit('users', users)
   },
 
-  updateActivities ({ commit, state }) {
-    // here will be the API call
-    const activities = [
-      {
-        id: 'a1',
-        name: 'Conference',
-        description: 'Conference allowance',
-        activitytype: 'Daily',
-        is_billable: false
-      },
-      {
-        id: 'a2',
-        name: 'Company1',
-        description: 'Work for the Company1 service',
-        activitytype: 'Daily',
-        is_billable: true
-      },
-      {
-        id: 'a3',
-        name: 'Bad Company2',
-        description: 'Work for the Company2 service',
-        activitytype: 'Hourly',
-        is_billable: true
-      },
-      {
-        id: 'a4',
-        name: 'Good Company3',
-        description: '',
-        activitytype: 'Daily',
-        is_billable: true
-      },
-    ]
+  async updateActivities ({ commit, state }) {
+    const activities = await getActivities()
     commit('activities', activities)
   },
 
-  updateExpenseSubmissions ({ commit, state }) {
-    // here will be the API call
-    const expenseSubmissions = [
-      { id: 'e1',
-        user_id: 'u1',
-        date: '2017-04-02',
-        concept: 'Qcon London',
-        state: 'submitted',
-        modified_by_reviewer: true,
-        expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Train', amount: 9.85 },
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Food', amount: 10.85 },
-          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting', amount: 900.43 }
-        ]
-      },
-      { id: 'e2',
-        user_id: 'u1',
-        date: '2016-05-01',
-        concept: 'Client expenses',
-        state: 'submitted',
-        modified_by_reviewer: false,
-        expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Metro', amount: 6.50 },
-          { activity_id: 'a3', date: '2017-04-01', concept: 'Coaching', amount: 100 },
-          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting', amount: 1000 }
-        ]
-      },
-      { id: 'e3',
-        user_id: 'u2',
-        date: '2017-08-03',
-        concept: 'Barcelona Trip',
-        state: 'reviewed',
-        modified_by_reviewer: false,
-        expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Bus', amount: 30.40 },
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Food', amount: 10.85 },
-          { activity_id: 'a1', date: '2017-03-28', concept: 'Food', amount: 10.85 }
-        ]
-      },
-      { id: 'e4',
-        user_id: 'u2',
-        date: '2015-03-02',
-        concept: 'Recruiting expenses',
-        state: 'saved',
-        modified_by_reviewer: false,
-        expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Train', amount: 142.99 },
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Food', amount: 20.43 },
-          { activity_id: 'a1', date: '2017-03-28', concept: 'Food', amount: 10 }
-        ]
-      },
-      { id: 'e5',
-        user_id: 'u3',
-        date: '2017-04-02',
-        concept: 'Catch-Up',
-        state: 'payed',
-        modified_by_reviewer: true,
-        expenses: [
-          { activity_id: 'a4', date: '2017-04-01', concept: 'Consulting', amount: 653.53 },
-          { activity_id: 'a3', date: '2017-04-01', concept: 'Consulting', amount: 102.85 },
-          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting', amount: 90.45 }
-        ]
-      }
-    ]
+  async updateExpenseSubmissions ({ commit, state }) {
+    const expenseSubmissions = await getExpenseSubmissions()
     commit('expenseSubmissions', expenseSubmissions)
   }
 }
