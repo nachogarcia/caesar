@@ -1,5 +1,11 @@
 <template>
-  <b-navbar class="bg-faded">
-    <b-navbar-brand href="/">Codurance</b-navbar-brand>
+  <b-navbar type="light" variant="info">
+    <b-navbar-brand tag="h1" href="/">Codurance</b-navbar-brand>
   </b-navbar>
 </template>
+
+<style scoped>
+  .navbar {
+    margin-bottom: 1rem;
+  }
+</style>
