@@ -96,9 +96,9 @@ const actions = {
         state: 'submitted',
         modified_by_reviewer: true,
         expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Train' },
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Food' },
-          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting' }
+          { activity_id: 'a1', date: '2017-04-01', concept: 'Train', amount: 9.85 },
+          { activity_id: 'a1', date: '2017-04-01', concept: 'Food', amount: 10.85 },
+          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting', amount: 900.43 }
         ]
       },
       { id: 'e2',
@@ -108,9 +108,9 @@ const actions = {
         state: 'submitted',
         modified_by_reviewer: false,
         expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Metro' },
-          { activity_id: 'a3', date: '2017-04-01', concept: 'Coaching' },
-          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting' }
+          { activity_id: 'a1', date: '2017-04-01', concept: 'Metro', amount: 6.50 },
+          { activity_id: 'a3', date: '2017-04-01', concept: 'Coaching', amount: 100 },
+          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting', amount: 1000 }
         ]
       },
       { id: 'e3',
@@ -120,9 +120,9 @@ const actions = {
         state: 'reviewed',
         modified_by_reviewer: false,
         expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Bus' },
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Food' },
-          { activity_id: 'a1', date: '2017-03-28', concept: 'Food' }
+          { activity_id: 'a1', date: '2017-04-01', concept: 'Bus', amount: 30.40 },
+          { activity_id: 'a1', date: '2017-04-01', concept: 'Food', amount: 10.85 },
+          { activity_id: 'a1', date: '2017-03-28', concept: 'Food', amount: 10.85 }
         ]
       },
       { id: 'e4',
@@ -132,9 +132,9 @@ const actions = {
         state: 'saved',
         modified_by_reviewer: false,
         expenses: [
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Train' },
-          { activity_id: 'a1', date: '2017-04-01', concept: 'Food' },
-          { activity_id: 'a1', date: '2017-03-28', concept: 'Food' }
+          { activity_id: 'a1', date: '2017-04-01', concept: 'Train', amount: 142.99 },
+          { activity_id: 'a1', date: '2017-04-01', concept: 'Food', amount: 20.43 },
+          { activity_id: 'a1', date: '2017-03-28', concept: 'Food', amount: 10 }
         ]
       },
       { id: 'e5',
@@ -144,9 +144,9 @@ const actions = {
         state: 'payed',
         modified_by_reviewer: true,
         expenses: [
-          { activity_id: 'a4', date: '2017-04-01', concept: 'Consulting' },
-          { activity_id: 'a3', date: '2017-04-01', concept: 'Consulting' },
-          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting' }
+          { activity_id: 'a4', date: '2017-04-01', concept: 'Consulting', amount: 653.53 },
+          { activity_id: 'a3', date: '2017-04-01', concept: 'Consulting', amount: 102.85 },
+          { activity_id: 'a2', date: '2017-03-28', concept: 'Consulting', amount: 90.45 }
         ]
       }
     ]
