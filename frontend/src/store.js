@@ -122,7 +122,7 @@ const actions = {
         expenses: [
           { activity_id: 'a1', date: '2017-04-01', concept: 'Bus' },
           { activity_id: 'a1', date: '2017-04-01', concept: 'Food' },
-          { activity_id: 'a1', date: '2017-3-28', concept: 'Food' }
+          { activity_id: 'a1', date: '2017-03-28', concept: 'Food' }
         ]
       },
       { id: 'e4',
@@ -157,7 +157,7 @@ const actions = {
 const getters = {
   expenseSubmissions: state => state.expenseSubmissions,
   expenseSubmission: state => state.expenseSubmission,
-  activity: state => id => state.activities.find(element => element.id === id),
+  activity: state => id => state.activities.find(element => element.id === id) | {},
   activities: state => state.activities,
   user: state => id => state.users.find(element => element.id === id)
 }
