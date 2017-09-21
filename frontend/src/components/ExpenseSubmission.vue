@@ -43,7 +43,7 @@
               <b-badge
                 pill
                 id="expenseSubmissionState"
-                :variant="getStateVariant(expenseSubmission.state)"
+                :variant="expenseSubmission.stateVariant"
                 class="text-capitalize"
               >
                 {{expenseSubmission.state}}
@@ -186,7 +186,6 @@
 
 <script>
   import * as Vuex from 'vuex'
-  import stateVariant from '@/stateVariant'
   import AddExpenseModal from '@/components/AddExpenseModal'
 
   export default {
@@ -199,10 +198,6 @@
     },
 
     methods: {
-      getStateVariant(state) {
-        return stateVariant[state]
-      },
-
       selectActivities () {
         return this.activities.map( activity => {
           return { text: activity.name, value: activity }

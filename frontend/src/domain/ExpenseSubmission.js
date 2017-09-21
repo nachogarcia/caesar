@@ -1,3 +1,10 @@
+const stateVariants = {
+  'submitted': 'primary',
+  'reviewed': 'info',
+  'saved': 'secondary',
+  'payed': 'success'
+}
+
 export default class ExpenseSubmission {
   constructor (id, user, date, concept, state, modifiedByReviewer, expenses) {
     this.id = id
@@ -12,5 +19,9 @@ export default class ExpenseSubmission {
   get total () {
     return this.expenses.map( expense => expense.amount )
       .reduce( (a, b) => Number(a) + Number(b) ).toFixed(2)
+  }
+
+  get stateVariant () {
+    return stateVariants[this.state]
   }
 }

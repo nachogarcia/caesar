@@ -29,7 +29,7 @@
           <b-row>
             <b-col cols="2">
               <b-badge
-                :variant="getStateVariant(data.item.state)"
+                :variant="data.item.stateVariant"
                 class="text-capitalize"
               >
                 {{data.item.state}}
@@ -52,7 +52,6 @@
 
 <script>
   import * as Vuex from 'vuex'
-  import stateVariant from '@/stateVariant'
 
   export default {
     name: 'ExpenseSubmissions',
@@ -91,10 +90,6 @@
 
     methods: {
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
-
-      getStateVariant(state) {
-        return stateVariant[state]
-      },
 
       getUserName (expenseSubmission) {
         return expenseSubmission.user.name
