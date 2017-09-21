@@ -5,4 +5,8 @@ export default class Expense {
     this.concept = concept
     this.amount = amount
   }
+
+  get billable () {
+    return this.activity.billable
+  }
 }

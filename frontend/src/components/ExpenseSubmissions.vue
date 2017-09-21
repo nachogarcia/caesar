@@ -21,15 +21,19 @@
         :sort-desc=true
         @row-clicked="selectExpense"
       >
-        <template slot="craftsperson" scope="data">
-          {{user(data.item.user_id).name}}
+        <template slot="userName" scope="data">
+          {{getUserName(data.item)}}
         </template>
-        <template slot="amount" scope="data">
-          {{total(data.item)}}
+
+        <template slot="total" scope="data">
+          <div class="text-right">
+            {{getTotal(data.item)}}
+          </div>
         </template>
+
         <template slot="status" scope="data">
-          <b-row align-h="between">
-            <b-col>
+          <b-row>
+            <b-col cols="2">
               <b-badge
                 :variant="getStateVariant(data.item.state)"
                 class="text-capitalize"
@@ -37,9 +41,9 @@
                 {{data.item.state}}
               </b-badge>
             </b-col>
-            <b-col>
+            <b-col cols="2">
               <b-badge
-                v-if="data.item.modified_by_reviewer"
+                v-if="data.item.modifiedByReviewer"
                 variant="danger"
               >
                 Modified by reviewer
@@ -53,47 +57,58 @@
 </template>
 
 <script>
-  import * as Vuex from 'vuex';
-  import stateVariant from '@/stateVariant';
+  import * as Vuex from 'vuex'
+  import stateVariant from '@/stateVariant'
 
   export default {
     name: 'ExpenseSubmissions',
     data: () => ({
       filter: null,
 
-      fields: {
-        craftsperson: {
+      fields: [
+        {
+          key: 'userName',
           label: 'Craftsperson',
         },
-        date: {
+        {
+          key: 'date',
           label: 'Date',
           sortable: true,
         },
-        concept: {
+        {
+          key: 'concept',
           label: 'Concept',
+          sortable: true,
         },
-        amount: {
+        {
+          key: 'total',
           label: 'Amount',
         },
-        status: {
+        {
+          key: 'status',
           label: 'Status',
         },
-      },
+      ]
     }),
 
     computed: {
-      ...Vuex.mapGetters(['expenseSubmissions', 'user']),
+      ...Vuex.mapGetters(['expenseSubmissions']),
     },
 
     methods: {
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
 
-      total (expenseSubmission) {
-        return expenseSubmission.expenses.map( expense => expense.amount ).reduce( (a, b) => a + b )
+      getStateVariant(state) {
+        return stateVariant[state]
       },
 
-      getStateVariant(state){
-        return stateVariant[state]
+      getUserName (expenseSubmission) {
+        return expenseSubmission.user.name
+      },
+
+      getTotal (expenseSubmission) {
+        return expenseSubmission.expenses.map( expense => expense.amount )
+          .reduce( (a, b) => a + b ).toFixed(2)
       },
 
       selectExpense (expense) {

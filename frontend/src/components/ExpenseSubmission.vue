@@ -55,7 +55,11 @@
 
       <h2>Expenses</h2>
       <b-card-group columns>
-        <b-card v-for="expense in expenseSubmission.expenses" :key="expense.date+expense.concept">
+        <b-card
+          v-for="expense in expenseSubmission.expenses"
+          :key="expense.date+expense.concept"
+          bg-variant="light"
+        >
 
           <b-form-row>
             <b-col cols="10">
@@ -112,11 +116,9 @@
                 <b-form-select
                   required
                   id="expenseActivity"
-                  v-model="expense.activity_id"
-                  :options="activities"
+                  v-model="expense.activity"
+                  :options="selectActivities()"
                   class="mb-3"
-                  text-field="name"
-                  value-field="id"
                 />
               </b-form-group>
             </b-col>
@@ -133,14 +135,14 @@
                   v-model="expense.amount"
                   placeholder="0.00"
                   step="0.01"
-                  min="0"
+                  min="0.00"
                   type="number"
                 />
               </b-input-group>
             </b-col>
 
             <b-col cols="3">
-              <b-badge v-if="activity(expense.activity_id).is_billable" variant="success">Billable</b-badge>
+              <b-badge v-if="expense.activity.billable" variant="success">Billable</b-badge>
               <b-badge v-else variant="secondary">Not Billable</b-badge>
             </b-col>
           </b-form-row>
@@ -159,7 +161,7 @@
           </b-button>
         </b-col>
         <b-col cols="2">
-          Total: {{total()}}
+          Total: {{getTotal(expenseSubmission)}}
         </b-col>
       </b-row>
 
@@ -180,20 +182,30 @@
 </template>
 
 <script>
-  import * as Vuex from 'vuex';
-  import stateVariant from '@/stateVariant';
+  import * as Vuex from 'vuex'
+  import stateVariant from '@/stateVariant'
 
   export default {
     name: 'ExpenseSubmission',
+
     computed: {
-      ...Vuex.mapGetters(['expenseSubmission', 'activity', 'activities']),
+      ...Vuex.mapGetters(['expenseSubmission', 'activities']),
     },
+
     methods: {
-      total () {
-        return this.expenseSubmission.expenses.map( expense => expense.amount ).reduce( (a, b) => a + parseFloat(b) )
-      },
-      getStateVariant (state) {
+      getStateVariant(state) {
         return stateVariant[state]
+      },
+
+      getTotal (expenseSubmission) {
+        return expenseSubmission.expenses.map( expense => expense.amount )
+          .reduce( (a, b) => Number(a) + Number(b) ).toFixed(2)
+      },
+
+      selectActivities () {
+        return this.activities.map( activity => {
+          return { text: activity.name, value: activity }
+        })
       },
 
       addExpense () {

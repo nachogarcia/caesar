@@ -3,12 +3,16 @@ import Vuex from 'vuex'
 import getActivities from '@/APICallers/ActivityCaller'
 import getUsers from '@/APICallers/UserCaller'
 import getExpenseSubmissions from '@/APICallers/ExpenseSubmissionCaller'
+import User from '@/domain/User'
+import Expense from '@/domain/Expense'
+import ExpenseSubmission from '@/domain/ExpenseSubmission'
+import Activity from '@/domain/Activity'
 
 Vue.use(Vuex)
 
 const state = {
   expenseSubmissions: [],
-  expense: {},
+  expenseSubmission: {},
   activities: [],
   users: []
 }
@@ -29,26 +33,64 @@ const mutations = {
 }
 
 const actions = {
-  async updateUsers ({ commit, state }) {
+  async updateUsers ({ commit }) {
     const users = await getUsers()
-    commit('users', users)
+    commit('users',
+      users.map( data =>
+        new User(
+          data.id,
+          data.name,
+          data.role,
+          data.active
+        )
+      )
+    )
   },
 
-  async updateActivities ({ commit, state }) {
+  async updateActivities ({ commit }) {
     const activities = await getActivities()
-    commit('activities', activities)
+    commit('activities',
+      activities.map( data =>
+        new Activity(
+          data.id,
+          data.name,
+          data.description,
+          data.activitytype,
+          data.is_billable
+        )
+      )
+    )
   },
 
-  async updateExpenseSubmissions ({ commit, state }) {
+  async updateExpenseSubmissions ({ commit, getters }) {
     const expenseSubmissions = await getExpenseSubmissions()
-    commit('expenseSubmissions', expenseSubmissions)
+    commit('expenseSubmissions',
+      expenseSubmissions.map( data =>
+        new ExpenseSubmission(
+          data.id,
+          getters.user(data.user_id),
+          data.date,
+          data.concept,
+          data.state,
+          data.modified_by_reviewer,
+          data.expenses.map( expense =>
+            new Expense(
+              getters.activity(expense.activity_id),
+              expense.date,
+              expense.concept,
+              expense.amount
+            )
+          )
+        )
+      )
+    )
   }
 }
 
 const getters = {
   expenseSubmissions: state => state.expenseSubmissions,
   expenseSubmission: state => state.expenseSubmission,
-  activity: state => id => state.activities.find(element => element.id === id) | {},
+  activity: state => id => state.activities.find(element => element.id === id),
   activities: state => state.activities,
   user: state => id => state.users.find(element => element.id === id)
 }
