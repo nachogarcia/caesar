@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import getActivities from '@/APICalls/Activity'
-import getUsers from '@/APICalls/User'
-import getExpenseSubmissions from '@/APICalls/ExpenseSubmission'
+import getActivities from '@/APICallers/ActivityCaller'
+import getUsers from '@/APICallers/UserCaller'
+import getExpenseSubmissions from '@/APICallers/ExpenseSubmissionCaller'
 
 Vue.use(Vuex)
 
