@@ -24,13 +24,26 @@
         <template slot="craftsperson" scope="data">
           {{user(data.item.user_id).name}}
         </template>
+        <template slot="amount" scope="data">
+          {{total(data.item)}}
+        </template>
         <template slot="status" scope="data">
-          <b-row>
+          <b-row align-h="between">
             <b-col>
-              <b-badge :variant="getStateVariant(data.item.state)">{{data.item.state}}</b-badge>
+              <b-badge
+                :variant="getStateVariant(data.item.state)"
+                class="text-capitalize"
+              >
+                {{data.item.state}}
+              </b-badge>
             </b-col>
             <b-col>
-              <b-badge v-if="data.item.modified_by_reviewer" variant="danger">Modified by reviewer</b-badge>
+              <b-badge
+                v-if="data.item.modified_by_reviewer"
+                variant="danger"
+              >
+                Modified by reviewer
+              </b-badge>
             </b-col>
           </b-row>
         </template>
@@ -51,7 +64,6 @@
       fields: {
         craftsperson: {
           label: 'Craftsperson',
-          sortable: true,
         },
         date: {
           label: 'Date',
@@ -59,7 +71,9 @@
         },
         concept: {
           label: 'Concept',
-          sortable: false,
+        },
+        amount: {
+          label: 'Amount',
         },
         status: {
           label: 'Status',
@@ -73,6 +87,10 @@
 
     methods: {
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
+
+      total (expenseSubmission) {
+        return expenseSubmission.expenses.map( expense => expense.amount ).reduce( (a, b) => a + b )
+      },
 
       getStateVariant(state){
         return stateVariant[state]
