@@ -162,7 +162,7 @@
           </b-button>
         </b-col>
         <b-col cols="2">
-          Total: {{getTotal(expenseSubmission)}}
+          Total: {{expenseSubmission.total}}
         </b-col>
       </b-row>
 
@@ -201,11 +201,6 @@
     methods: {
       getStateVariant(state) {
         return stateVariant[state]
-      },
-
-      getTotal (expenseSubmission) {
-        return expenseSubmission.expenses.map( expense => expense.amount )
-          .reduce( (a, b) => Number(a) + Number(b) ).toFixed(2)
       },
 
       selectActivities () {

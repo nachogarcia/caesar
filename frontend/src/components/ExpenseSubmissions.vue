@@ -25,12 +25,6 @@
           {{getUserName(data.item)}}
         </template>
 
-        <template slot="total" scope="data">
-          <div class="text-right">
-            {{getTotal(data.item)}}
-          </div>
-        </template>
-
         <template slot="status" scope="data">
           <b-row>
             <b-col cols="2">
@@ -104,11 +98,6 @@
 
       getUserName (expenseSubmission) {
         return expenseSubmission.user.name
-      },
-
-      getTotal (expenseSubmission) {
-        return expenseSubmission.expenses.map( expense => expense.amount )
-          .reduce( (a, b) => a + b ).toFixed(2)
       },
 
       selectExpense (expense) {

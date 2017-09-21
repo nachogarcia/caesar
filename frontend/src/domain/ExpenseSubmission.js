@@ -10,8 +10,7 @@ export default class ExpenseSubmission {
   }
 
   get total () {
-    console.log('gettingTotal')
     return this.expenses.map( expense => expense.amount )
-      .reduce( (a, b) => a + b )
+      .reduce( (a, b) => Number(a) + Number(b) ).toFixed(2)
   }
 }
