@@ -100,7 +100,7 @@
       </b-card-group>
       <b-button
         variant="primary"
-        @click="expenseSubmission.expenses.push({})">
+        @click="addExpense">
         Add Expense
       </b-button>
 
@@ -125,9 +125,15 @@
         return stateVariant[state]
       },
 
+      addExpense(){
+        Promise.resolve(this.expenseSubmission.expenses.push({})).then( () => {
+          window.scrollTo(0,document.body.scrollHeight)
+        })
+      },
+
       submitExpense(evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.expenseSubmission));
+        alert(JSON.stringify(this.expenseSubmission))
       }
     }
   }
