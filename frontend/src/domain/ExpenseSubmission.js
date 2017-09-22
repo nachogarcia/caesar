@@ -16,6 +16,10 @@ export default class ExpenseSubmission {
     this.expenses = expenses
   }
 
+  get userName () {
+    return this.user.name
+  }
+
   get total () {
     return this.expenses.map( expense => expense.amount )
       .reduce( (a, b) => Number(a) + Number(b) ).toFixed(2)

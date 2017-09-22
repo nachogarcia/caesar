@@ -21,13 +21,9 @@
         :sort-desc=true
         @row-clicked="selectExpense"
       >
-        <template slot="userName" scope="data">
-          {{getUserName(data.item)}}
-        </template>
-
         <template slot="status" scope="data">
           <b-row>
-            <b-col cols="2">
+            <b-col cols="3">
               <b-badge
                 :variant="data.item.stateVariant"
                 class="text-capitalize"
@@ -35,7 +31,7 @@
                 {{data.item.state}}
               </b-badge>
             </b-col>
-            <b-col cols="2">
+            <b-col cols="3">
               <b-badge
                 v-if="data.item.modifiedByReviewer"
                 variant="danger"
@@ -62,6 +58,7 @@
         {
           key: 'userName',
           label: 'Craftsperson',
+          sortable: true,
         },
         {
           key: 'date',
@@ -76,6 +73,7 @@
         {
           key: 'total',
           label: 'Amount',
+          sortable: true,
         },
         {
           key: 'status',
@@ -90,10 +88,6 @@
 
     methods: {
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
-
-      getUserName (expenseSubmission) {
-        return expenseSubmission.user.name
-      },
 
       selectExpense (expense) {
         this.$store.commit('expenseSubmission', expense);
