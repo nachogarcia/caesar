@@ -90,8 +90,8 @@
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
 
       selectExpense (expense) {
-        this.$store.commit('expenseSubmission', expense);
-        this.$router.push('expenseSubmission');
+        this.$store.commit('expenseSubmission', expense)
+        this.$router.push('expenseSubmission')
       },
     },
 
