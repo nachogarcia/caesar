@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <h2>{{expenseSubmission.userName}} expense submission</h2>
-    <b-form @submit="submitExpense">
+    <b-form @submit="submitExpense" validated>
       <b-form-row>
         <b-col cols-md="5">
           <h3>
