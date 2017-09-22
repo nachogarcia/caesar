@@ -66,7 +66,7 @@
             + Add Expense
           </b-button>
         </b-col>
-        <b-col cols="2">
+        <b-col cols="4">
           Total: {{expenseSubmission.total}}
         </b-col>
       </b-row>

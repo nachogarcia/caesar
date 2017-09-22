@@ -23,7 +23,7 @@
       >
         <template slot="status" scope="data">
           <b-row>
-            <b-col cols="3">
+            <b-col md="3">
               <b-badge
                 :variant="data.item.stateVariant"
                 class="text-capitalize"
@@ -31,7 +31,7 @@
                 {{data.item.state}}
               </b-badge>
             </b-col>
-            <b-col cols="3">
+            <b-col md="3">
               <b-badge
                 v-if="data.item.modifiedByReviewer"
                 variant="danger"
