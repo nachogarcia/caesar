@@ -71,15 +71,26 @@
         </b-col>
       </b-row>
 
-      <b-row>
+      <b-row class="mt-2">
+        <b-col>
+          <b-button
+            @click="saveExpense"
+            variant="primary"
+            block
+          >
+            <span v-if="saving">Saving...</span>
+            <span v-else>Save</span>
+          </b-button>
+        </b-col>
+
         <b-col>
           <b-button
             type="submit"
-            variant="primary"
-            class="mt-2"
+            variant="success"
             block
           >
-            Submit
+            <span v-if="submitting">Submitting...</span>
+            <span v-else>Submit</span>
           </b-button>
         </b-col>
       </b-row>
@@ -106,6 +117,11 @@
       ...Vuex.mapGetters(['expenseSubmission', 'activities']),
     },
 
+    data: () => ({
+      saving: false,
+      submitting: false,
+    }),
+
     methods: {
       addExpense () {
         Promise.resolve(this.expenseSubmission.expenses.push(new Expense())).then( () => {
@@ -113,9 +129,26 @@
         })
       },
 
+      saveExpense (evt) {
+        evt.preventDefault()
+        this.saving = true
+        //In the future save Expense
+        Promise.resolve(alert(JSON.stringify(this.expenseSubmission))).then( () => {
+          setTimeout( () => {
+            this.$router.push('/')
+          }, 2000)
+        })
+      },
+
       submitExpense (evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.expenseSubmission))
+        this.submitting = true
+        //In the future submit Expense
+        Promise.resolve(alert(JSON.stringify(this.expenseSubmission)), 40).then( () => {
+          setTimeout( () => {
+            this.$router.push('/')
+          }, 2000)
+        })
       }
     }
   }
