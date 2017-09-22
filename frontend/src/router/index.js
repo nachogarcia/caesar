@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ExpenseSubmissions from '@/components/ExpenseSubmissions'
-import ExpenseSubmission from '@/components/ExpenseSubmission'
+const ExpenseSubmissions = () => import('@/components/ExpenseSubmissions')
+const ExpenseSubmission = () => import('@/components/ExpenseSubmission')
 
 Vue.use(Router)
 

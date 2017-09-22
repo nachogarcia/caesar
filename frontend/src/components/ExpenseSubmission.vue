@@ -102,7 +102,7 @@
 
 <script>
   import * as Vuex from 'vuex'
-  import AddExpenseModal from '@/components/AddExpenseModal'
+  const AddExpenseModal = () => import('@/components/AddExpenseModal')
   import ExpenseList from '@/components/ExpenseList'
 
   export default {
