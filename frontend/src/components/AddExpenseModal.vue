@@ -1,11 +1,13 @@
 <template>
   <b-modal
     id="addExpenseModal"
+    ref="addExpenseModal"
     title="Add a new Expense"
-    @ok="submit"
+    @ok="handleOk"
     @shown="clearModal"
+    lazy
   >
-    <b-form @submit.stop.prevent="submit">
+    <b-form @submit.stop.prevent="handleSubmit" validated>
       <b-form-row>
         <b-col>
           <b-form-group
@@ -69,7 +71,7 @@
               v-model="expense.amount"
               placeholder="0.00"
               step="0.01"
-              min="0.00"
+              min="0.01"
               type="number"
             />
           </b-input-group>
@@ -110,9 +112,18 @@
         this.expense = new Expense({}, '', '', 0.00)
       },
 
-      submit (e) {
+      handleOk (e) {
         e.preventDefault()
+        if (this.expense.activity == {} ||
+            this.expense.date == '' ||
+            this.expense.concept == '' ||
+            this.expense.amount == 0.00 ) {}
+        else this.handleSubmit()
+      },
+
+      handleSubmit () {
         this.expenseSubmission.expenses.push(this.expense)
+        this.$refs.addExpenseModal.hide()
       },
     },
   }
