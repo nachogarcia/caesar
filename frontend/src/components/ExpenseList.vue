@@ -3,8 +3,8 @@
     <h3>Expenses</h3>
     <b-card-group columns>
       <b-card
-        v-for="expense in expenseSubmission.expenses"
-        :key="expense.date+expense.concept"
+        v-for="(expense, index) in expenseSubmission.expenses"
+        :key="index"
         bg-variant="light"
       >
 
