@@ -1,9 +1,10 @@
 <template>
   <b-container>
+    <h2>{{expenseSubmission.userName}} expense submission</h2>
     <b-form @submit="submitExpense">
       <b-form-row>
         <b-col cols-md="5">
-          <h2>
+          <h3>
             <b-form-group
               id="expenseSubmissionConceptGroup"
               label="Concept" label-for="expenseSubmissionConcept"
@@ -15,11 +16,11 @@
                 placeholder="Concept of the expense submission"
               />
             </b-form-group>
-          </h2>
+          </h3>
         </b-col>
 
         <b-col cols-md="5">
-          <h2>
+          <h3>
             <b-form-group
               id="expenseSumbissionDateGroup"
               label="Date" label-for="expenseSubmissionDate"
@@ -31,11 +32,11 @@
                 type="date"
               />
             </b-form-group>
-          </h2>
+          </h3>
         </b-col>
 
         <b-col cols-md="2">
-          <h2>
+          <h3>
             <b-form-group
               id="expenseSumbissionStateGroup"
               label="State" label-for="expenseSubmissionState"
@@ -49,11 +50,11 @@
                 {{expenseSubmission.state}}
               </b-badge>
             </b-form-group>
-          </h2>
+          </h3>
         </b-col>
       </b-form-row>
 
-      <h2>Expenses</h2>
+      <h3>Expenses</h3>
       <b-card-group columns>
         <b-card
           v-for="expense in expenseSubmission.expenses"
