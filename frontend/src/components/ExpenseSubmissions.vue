@@ -43,6 +43,13 @@
         </template>
       </b-table>
     </b-row>
+    <b-button
+      @click="createExpenseSubmission"
+      variant="primary"
+      block
+    >
+    Create new expense submission
+    </b-button>
   </b-container>
 </template>
 
@@ -94,6 +101,10 @@
         this.$store.commit('expenseSubmission', expense)
         this.$router.push('expenseSubmission')
       },
+
+      createExpenseSubmission () {
+        this.$router.push('expenseSubmission')
+      }
     },
 
     created () {
