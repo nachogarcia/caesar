@@ -28,7 +28,7 @@ async function getActivities () {
         description: '',
         activitytype: 'Daily',
         is_billable: true
-      },
+      }
     ]
   )
 }

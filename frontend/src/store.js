@@ -36,7 +36,7 @@ const actions = {
   async updateUsers ({ commit }) {
     const users = await getUsers()
     commit('users',
-      users.map( data =>
+      users.map(data =>
         new User(
           data.id,
           data.name,
@@ -50,7 +50,7 @@ const actions = {
   async updateActivities ({ commit }) {
     const activities = await getActivities()
     commit('activities',
-      activities.map( data =>
+      activities.map(data =>
         new Activity(
           data.id,
           data.name,
@@ -65,7 +65,7 @@ const actions = {
   async updateExpenseSubmissions ({ commit, getters }) {
     const expenseSubmissions = await getExpenseSubmissions()
     commit('expenseSubmissions',
-      expenseSubmissions.map( data =>
+      expenseSubmissions.map(data =>
         new ExpenseSubmission(
           data.id,
           getters.user(data.user_id),
@@ -73,7 +73,7 @@ const actions = {
           data.concept,
           data.state,
           data.modified_by_reviewer,
-          data.expenses.map( expense =>
+          data.expenses.map(expense =>
             new Expense(
               getters.activity(expense.activity_id),
               expense.date,

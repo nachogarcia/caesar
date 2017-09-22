@@ -1,5 +1,5 @@
 export default class Activity {
-  constructor (id, name, description, type, billable){
+  constructor (id, name, description, type, billable) {
     this.id = id
     this.name = name
     this.description = description

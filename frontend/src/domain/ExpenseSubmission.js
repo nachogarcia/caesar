@@ -21,8 +21,8 @@ export default class ExpenseSubmission {
   }
 
   get total () {
-    return this.expenses.map( expense => expense.amount )
-      .reduce( (a, b) => Number(a) + Number(b) ).toFixed(2)
+    return this.expenses.map(expense => expense.amount)
+      .reduce((a, b) => Number(a) + Number(b)).toFixed(2)
   }
 
   get stateVariant () {
