@@ -74,6 +74,7 @@
           key: 'total',
           label: 'Amount',
           sortable: true,
+          class: 'text-right',
         },
         {
           key: 'status',
