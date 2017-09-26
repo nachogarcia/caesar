@@ -1,0 +1,49 @@
+service: caesar-api
+provider:
+  name: aws
+  runtime: nodejs6.10
+  region: eu-west-2
+  timeout: 10
+  iamRoleStatements:
+  - Effect: "Allow"
+    Action:
+      - "ec2:CreateNetworkInterface"
+      - "ec2:DescribeNetworkInterfaces"
+      - "ec2:DetachNetworkInterface"
+      - "ec2:DeleteNetworkInterface"
+    Resource: "*"
+  vpc:
+    securityGroupIds:
+    subnetIds:
+  environment:
+    DATABASE_URL: ${file(./serverless.env.yml):${opt:stage, self:provider.stage}.DATABASE_URL}
+
+functions:
+  POST_ExpenseSubmission:
+    handler: serverlessHandlers.POST_ExpenseSubmission
+    events:
+      - http:
+          path: /
+          method: post
+  PUT_ExpenseSubmission:
+    handler: serverlessHandlers.PUT_ExpenseSubmission
+    events:
+      - http:
+          path: /
+          method: put
+  GET_ExpenseSubmission:
+    handler: serverlessHandlers.GET_ExpenseSubmission
+    events:
+      - http:
+          path: /
+          method: patch
+  DELETE_ExpenseSubmission:
+    handler: serverlessHandlers.DELETE_ExpenseSubmission
+    events:
+      - http:
+          path: /{id}
+          method: delete
+          request:
+            parameters:
+              paths:
+                id: true

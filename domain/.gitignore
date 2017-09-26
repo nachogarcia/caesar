@@ -55,6 +55,10 @@ fabric.properties
 
 .idea/
 
+### Serverless ###
+# Ignore build directory
+.serverless
+
 ### Git ###
 *.orig
 
