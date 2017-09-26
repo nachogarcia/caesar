@@ -58,7 +58,7 @@
       <hr />
 
       <b-row align-h="between">
-        <b-col cols="2">
+        <b-col cols="6" class="pull-left">
           <b-button
             variant="primary"
             v-b-modal.addExpenseModal
@@ -66,8 +66,8 @@
             + Add Expense
           </b-button>
         </b-col>
-        <b-col cols="4">
-          Total: {{expenseSubmission.total}}
+        <b-col cols="6"class="pull-right text-right">
+          <strong>Total:</strong> {{expenseSubmission.total}}
         </b-col>
       </b-row>
 
