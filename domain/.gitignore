@@ -117,6 +117,7 @@ typings/
 
 # dotenv environment variables file
 .env
+.envrc
 
 
 ### Vim ###
