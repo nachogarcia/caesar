@@ -34,7 +34,7 @@
             <b-col md="3">
               <b-badge
                 v-if="data.item.modifiedByReviewer"
-                variant="danger"
+                variant="warning"
               >
                 Modified by reviewer
               </b-badge>

@@ -2,7 +2,8 @@ const stateVariants = {
   'submitted': 'primary',
   'reviewed': 'info',
   'saved': 'secondary',
-  'payed': 'success'
+  'payed': 'success',
+  'rejected': 'danger'
 }
 
 export default class ExpenseSubmission {
