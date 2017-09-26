@@ -17,7 +17,7 @@ async function getExpenseSubmissions () {
         user_id: 'u1',
         date: '2016-05-01',
         concept: 'Client expenses',
-        state: 'submitted',
+        state: 'rejected',
         modified_by_reviewer: false,
         expenses: [
           { activity_id: 'a1', date: '2017-04-01', concept: 'Metro', amount: 6.50 },

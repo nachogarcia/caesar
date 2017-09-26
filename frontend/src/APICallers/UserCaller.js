@@ -16,7 +16,7 @@ async function getUsers () {
       {
         id: 'u3',
         name: 'User3',
-        role: ['craftsman'],
+        role: ['expense-approver'],
         active: false
       }
     ]
