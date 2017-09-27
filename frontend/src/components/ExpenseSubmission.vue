@@ -49,7 +49,7 @@
                 :variant="expenseSubmission.stateVariant"
                 class="text-capitalize"
               >
-                {{expenseSubmission.state? expenseSubmission.state : 'Unsaved'}}
+                {{expenseSubmission.state}}
               </b-badge>
             </b-form-group>
           </h3>
@@ -62,7 +62,7 @@
       <b-row align-h="between">
         <b-col cols="6" class="pull-left">
           <b-button
-            v-if="!expenseSubmission.state | expenseSubmission.state === 'saved'"
+            v-if="expenseSubmission.state === 'creating' | expenseSubmission.state === 'saved'"
             variant="primary"
             v-b-modal.addExpenseModal
           >

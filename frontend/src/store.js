@@ -87,10 +87,7 @@ const actions = {
         )
       )
     )
-  },
-
-  async currentUser ({ commit, getters }) {
-    commit('currentUser', getters.users()[0] )
+    commit('currentUser', getters.users[0] )
   },
 }
 
@@ -99,6 +96,7 @@ const getters = {
   expenseSubmission: state => state.expenseSubmission,
   activity: state => id => state.activities.find(element => element.id === id),
   activities: state => state.activities,
+  users: state => state.users,
   user: state => id => state.users.find(element => element.id === id),
   currentUser: state => state.currentUser,
 }

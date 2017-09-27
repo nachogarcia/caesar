@@ -21,6 +21,7 @@ export default class ExpenseSubmission {
   }
 
   get total () {
+    if (this.expenses.length === 0) return 0
     return this.expenses.map(expense => expense.amount)
       .reduce((a, b) => Number(a) + Number(b)).toFixed(2)
   }
@@ -34,6 +35,7 @@ export default class ExpenseSubmission {
   }
 
   get editable () {
+    if (this.state === 'creating') return true
     return this.user.reviewer ? this.state === 'submitted' : this.state === 'saved'
   }
 }

@@ -55,6 +55,7 @@
 
 <script>
   import * as Vuex from 'vuex'
+  import ExpenseSubmission from '@/domain/ExpenseSubmission'
 
   export default {
     name: 'ExpenseSubmissions',
@@ -91,18 +92,19 @@
     }),
 
     computed: {
-      ...Vuex.mapGetters(['expenseSubmissions']),
+      ...Vuex.mapGetters(['expenseSubmissions', 'currentUser']),
     },
 
     methods: {
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
 
-      selectExpense (expense) {
-        this.$store.commit('expenseSubmission', expense)
+      selectExpense (expenseSubmission) {
+        this.$store.commit('expenseSubmission', expenseSubmission)
         this.$router.push('expenseSubmission')
       },
 
       createExpenseSubmission () {
+        this.$store.commit('expenseSubmission', new ExpenseSubmission(undefined, this.currentUser, '', '', 'creating', []))
         this.$router.push('expenseSubmission')
       }
     },
