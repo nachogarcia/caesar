@@ -94,7 +94,7 @@
     name: 'AddExpenseModal',
 
     data: () => ({
-      expense: new Expense({}, '', '', 0.00)
+      expense: new Expense('', {}, '', '', 0.00, '')
     }),
 
     computed: {
@@ -109,7 +109,7 @@
       },
 
       clearModal () {
-        this.expense = new Expense({}, '', '', 0.00)
+        this.expense = new Expense('', {}, '', '', 0.00, '')
       },
 
       handleOk (e) {

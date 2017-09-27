@@ -77,6 +77,7 @@ const actions = {
           data.state,
           data.expenses.map(expense =>
             new Expense(
+              expense.id,
               getters.activity(expense.activity_id),
               expense.date,
               expense.concept,

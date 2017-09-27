@@ -1,5 +1,6 @@
 export default class Expense {
-  constructor (activity, date, concept, amount, modified) {
+  constructor (id, activity, date, concept, amount, modified) {
+    this.id = id
     this.activity = activity
     this.date = date
     this.concept = concept
