@@ -126,12 +126,6 @@
     }),
 
     methods: {
-      addExpense () {
-        Promise.resolve(this.expenseSubmission.expenses.push(new Expense())).then( () => {
-          window.scrollTo(0,document.body.scrollHeight)
-        })
-      },
-
       saveExpense (evt) {
         evt.preventDefault()
         this.saving = true
