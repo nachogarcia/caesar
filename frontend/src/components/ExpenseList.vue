@@ -5,7 +5,7 @@
       <b-card
         v-for="(expense, index) in expenseSubmission.expenses"
         :key="index"
-        bg-variant="light"
+        :bg-variant="expense.modified? 'warning' : 'light'"
       >
 
         <b-form-row>

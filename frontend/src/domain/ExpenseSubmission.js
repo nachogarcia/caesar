@@ -1,19 +1,18 @@
 const stateVariants = {
+  'accepted': 'info',
   'submitted': 'primary',
-  'reviewed': 'info',
   'saved': 'secondary',
   'payed': 'success',
   'rejected': 'danger'
 }
 
 export default class ExpenseSubmission {
-  constructor (id, user, date, concept, state, modifiedByReviewer, expenses) {
+  constructor (id, user, date, concept, state, expenses) {
     this.id = id
     this.user = user
     this.date = date
     this.concept = concept
     this.state = state
-    this.modifiedByReviewer = modifiedByReviewer
     this.expenses = expenses
   }
 
@@ -28,5 +27,9 @@ export default class ExpenseSubmission {
 
   get stateVariant () {
     return stateVariants[this.state]
+  }
+
+  get modified () {
+    return this.expenses.some( expense => expense.modified )
   }
 }

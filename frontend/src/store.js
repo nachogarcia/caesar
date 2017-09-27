@@ -72,13 +72,13 @@ const actions = {
           data.date,
           data.concept,
           data.state,
-          data.modified_by_reviewer,
           data.expenses.map(expense =>
             new Expense(
               getters.activity(expense.activity_id),
               expense.date,
               expense.concept,
-              expense.amount
+              expense.amount,
+              expense.modified
             )
           )
         )
