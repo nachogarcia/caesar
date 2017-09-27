@@ -5,4 +5,8 @@ export default class User {
     this.roles = roles
     this.active = active
   }
+
+  get reviewer () {
+    return this.roles.includes('expense-approver')
+  }
 }

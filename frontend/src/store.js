@@ -29,7 +29,10 @@ const mutations = {
   },
   activities (state, activities) {
     state.activities = activities
-  }
+  },
+  currentUser (state, currentUser) {
+    state.currentUser = currentUser
+  },
 }
 
 const actions = {
@@ -84,7 +87,11 @@ const actions = {
         )
       )
     )
-  }
+  },
+
+  async currentUser ({ commit, getters }) {
+    commit('currentUser', getters.users()[0] )
+  },
 }
 
 const getters = {
@@ -92,7 +99,8 @@ const getters = {
   expenseSubmission: state => state.expenseSubmission,
   activity: state => id => state.activities.find(element => element.id === id),
   activities: state => state.activities,
-  user: state => id => state.users.find(element => element.id === id)
+  user: state => id => state.users.find(element => element.id === id),
+  currentUser: state => state.currentUser,
 }
 
 export default new Vuex.Store({

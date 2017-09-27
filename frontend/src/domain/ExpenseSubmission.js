@@ -32,4 +32,8 @@ export default class ExpenseSubmission {
   get modified () {
     return this.expenses.some( expense => expense.modified )
   }
+
+  get editable () {
+    return this.user.reviewer ? this.state === 'submitted' : this.state === 'saved'
+  }
 }

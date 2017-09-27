@@ -4,7 +4,7 @@ async function getUsers () {
       {
         id: 'u1',
         name: 'User1',
-        role: ['Apprentice'],
+        role: ['expense-approver'],
         active: true
       },
       {
@@ -16,7 +16,7 @@ async function getUsers () {
       {
         id: 'u3',
         name: 'User3',
-        role: ['expense-approver'],
+        role: ['Apprentice'],
         active: false
       }
     ]

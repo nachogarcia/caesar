@@ -9,7 +9,7 @@
       >
 
         <b-form-row>
-          <b-col cols="10">
+          <b-col :cols="expenseSubmission.editable? 10 : 12">
             <b-form-group
               horizontal
               id="expenseDateGroup"
@@ -20,12 +20,14 @@
                 id="expenseDate"
                 v-model="expense.date"
                 type="date"
+                :readonly="!expenseSubmission.editable"
               />
             </b-form-group>
           </b-col>
 
           <b-col cols="2">
             <b-button
+              v-if="expenseSubmission.editable"
               size="sm"
               variant="danger"
               @click="deleteExpense(expense)"
@@ -48,6 +50,7 @@
                 id="expenseConcept"
                 v-model="expense.concept"
                 placeholder="Concept of the expense"
+                :readonly="!expenseSubmission.editable"
               />
             </b-form-group>
           </b-col>
@@ -66,6 +69,7 @@
                 v-model="expense.activity"
                 :options="selectActivities()"
                 class="mb-3"
+                :disabled="!expenseSubmission.editable"
               />
             </b-form-group>
           </b-col>
@@ -84,6 +88,7 @@
                 step="0.01"
                 min="0.00"
                 type="number"
+                :readonly="!expenseSubmission.editable"
               />
             </b-input-group>
           </b-col>

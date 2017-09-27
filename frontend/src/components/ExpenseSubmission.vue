@@ -14,6 +14,7 @@
                 id="expenseSubmissionConcept"
                 v-model="expenseSubmission.concept"
                 placeholder="Concept of the expense submission"
+                :readonly="!expenseSubmission.editable"
               />
             </b-form-group>
           </h3>
@@ -30,6 +31,7 @@
                 id="expenseSubmissionDate"
                 v-model="expenseSubmission.date"
                 type="date"
+                :readonly="!expenseSubmission.editable"
               />
             </b-form-group>
           </h3>
@@ -47,7 +49,7 @@
                 :variant="expenseSubmission.stateVariant"
                 class="text-capitalize"
               >
-                {{expenseSubmission.state}}
+                {{expenseSubmission.state? expenseSubmission.state : 'Unsaved'}}
               </b-badge>
             </b-form-group>
           </h3>
@@ -60,6 +62,7 @@
       <b-row align-h="between">
         <b-col cols="6" class="pull-left">
           <b-button
+            v-if="!expenseSubmission.state | expenseSubmission.state === 'saved'"
             variant="primary"
             v-b-modal.addExpenseModal
           >
@@ -132,6 +135,7 @@
       saveExpense (evt) {
         evt.preventDefault()
         this.saving = true
+        this.expenseSubmission.state = 'saved'
         //In the future save Expense
         Promise.resolve(alert(JSON.stringify(this.expenseSubmission))).then( () => {
           setTimeout( () => {
@@ -143,6 +147,7 @@
       submitExpense (evt) {
         evt.preventDefault()
         this.submitting = true
+        this.expenseSubmission.state = 'submitted'
         //In the future submit Expense
         Promise.resolve(alert(JSON.stringify(this.expenseSubmission)), 40).then( () => {
           setTimeout( () => {
