@@ -32,7 +32,7 @@ const mutations = {
   },
   currentUser (state, currentUser) {
     state.currentUser = currentUser
-  },
+  }
 }
 
 const actions = {
@@ -87,8 +87,8 @@ const actions = {
         )
       )
     )
-    commit('currentUser', getters.users[0] )
-  },
+    commit('currentUser', getters.users[0])
+  }
 }
 
 const getters = {
@@ -98,7 +98,7 @@ const getters = {
   activities: state => state.activities,
   users: state => state.users,
   user: state => id => state.users.find(element => element.id === id),
-  currentUser: state => state.currentUser,
+  currentUser: state => state.currentUser
 }
 
 export default new Vuex.Store({

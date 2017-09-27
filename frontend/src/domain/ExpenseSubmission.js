@@ -31,7 +31,7 @@ export default class ExpenseSubmission {
   }
 
   get modified () {
-    return this.expenses.some( expense => expense.modified )
+    return this.expenses.some(expense => expense.modified)
   }
 
   get editable () {
