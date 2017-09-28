@@ -20,6 +20,7 @@
         :sort-by="'date'"
         :sort-desc=true
         @row-clicked="selectExpense"
+        class="pointer"
       >
         <template slot="status" scope="data">
           <b-row>
