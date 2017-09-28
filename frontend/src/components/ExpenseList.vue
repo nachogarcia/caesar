@@ -27,15 +27,13 @@
             </b-col>
 
             <b-col cols="2">
-              <b-button
+              <span
                 v-if="expenseSubmission.editable"
-                size="sm"
-                variant="danger"
                 @click="deleteExpense(expense)"
-                class="float-right"
+                class="float-right text-danger"
               >
-                X
-              </b-button>
+                <icon name="times-circle" scale="2" />
+              </span>
             </b-col>
           </b-form-row>
 
@@ -78,9 +76,10 @@
 
           <b-form-row>
             <b-col>
-              <b-input-group
-                  left="$"
-              >
+              <b-input-group>
+                <b-input-group-addon>
+                  <icon name="money" />
+                </b-input-group-addon>
                 <b-form-input
                   required
                   id="expenseAmount"

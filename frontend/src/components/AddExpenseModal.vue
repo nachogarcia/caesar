@@ -62,9 +62,10 @@
 
       <b-form-row>
         <b-col>
-          <b-input-group
-              left="$"
-          >
+          <b-input-group>
+            <b-input-group-addon>
+              <icon name="money" />
+            </b-input-group-addon>
             <b-form-input
               required
               id="expenseAmount"

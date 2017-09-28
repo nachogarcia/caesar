@@ -43,13 +43,12 @@
         </template>
       </b-table>
     </b-row>
-    <b-button
+    <div
+      class="text-primary text-center"
       @click="createExpenseSubmission"
-      variant="primary"
-      block
     >
-    Create new expense submission
-    </b-button>
+      <icon name="plus-circle" scale="4" />
+    </div>
   </b-container>
 </template>
 

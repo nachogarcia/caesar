@@ -57,19 +57,23 @@
       </b-form-row>
 
       <ExpenseList />
-      <hr />
 
-      <b-row align-h="between">
-        <b-col cols="6" class="pull-left">
-          <b-button
+      <b-row>
+        <b-col class="text-center">
+          <div
             v-if="expenseSubmission.state === 'creating' | expenseSubmission.state === 'saved'"
-            variant="primary"
+            class="text-primary"
             v-b-modal.addExpenseModal
           >
-            + Add Expense
-          </b-button>
+            <icon name="plus-circle" scale="4" />
+          </div>
         </b-col>
-        <b-col cols="6"class="pull-right text-right">
+      </b-row>
+
+      <hr />
+
+      <b-row>
+        <b-col class="pull-right text-right">
           <strong>Total:</strong> {{expenseSubmission.total}}
         </b-col>
       </b-row>
