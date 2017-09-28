@@ -4,17 +4,19 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
+    <Spinner />
     <Foot />
   </div>
 </template>
 
 <script>
-import NavBar from './components/NavBar'
-import Foot from './components/Foot'
+import NavBar from '@/components/NavBar'
+import Foot from '@/components/Foot'
+import Spinner from '@/components/Spinner'
 
 export default {
   name: 'app',
-  components: { NavBar, Foot }
+  components: { NavBar, Foot, Spinner }
 }
 </script>
 

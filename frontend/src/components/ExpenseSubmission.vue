@@ -85,8 +85,7 @@
             variant="primary"
             block
           >
-            <span v-if="saving">Saving...</span>
-            <span v-else>Save</span>
+            Save
           </b-button>
         </b-col>
 
@@ -96,8 +95,7 @@
             variant="success"
             block
           >
-            <span v-if="submitting">Submitting...</span>
-            <span v-else>Submit</span>
+            Submit
           </b-button>
         </b-col>
       </b-row>
@@ -124,33 +122,36 @@
       ...Vuex.mapGetters(['expenseSubmission', 'activities']),
     },
 
-    data: () => ({
-      saving: false,
-      submitting: false,
-    }),
-
     methods: {
       saveExpense (evt) {
         evt.preventDefault()
-        this.saving = true
+        this.$store.commit('busy')
         this.expenseSubmission.state = 'saved'
         //In the future save Expense
-        Promise.resolve(alert(JSON.stringify(this.expenseSubmission))).then( () => {
+        new Promise( (resolve, reject) => {
           setTimeout( () => {
-            this.$router.push('/')
+            alert(JSON.stringify(this.expenseSubmission))
+            resolve()
           }, 2000)
+        }).then( () => {
+          this.$store.commit('free')
+          this.$router.push('/')
         })
       },
 
       submitExpense (evt) {
         evt.preventDefault()
-        this.submitting = true
+        this.$store.commit('busy')
         this.expenseSubmission.state = 'submitted'
         //In the future submit Expense
-        Promise.resolve(alert(JSON.stringify(this.expenseSubmission)), 40).then( () => {
+        new Promise( (resolve, reject) => {
           setTimeout( () => {
-            this.$router.push('/')
+            alert(JSON.stringify(this.expenseSubmission))
+            resolve()
           }, 2000)
+        }).then( () => {
+          this.$store.commit('free')
+          this.$router.push('/')
         })
       }
     }

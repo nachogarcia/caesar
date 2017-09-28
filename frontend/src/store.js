@@ -14,7 +14,8 @@ const state = {
   expenseSubmissions: [],
   expenseSubmission: {},
   activities: [],
-  users: []
+  users: [],
+  loading: 0
 }
 
 const mutations = {
@@ -32,11 +33,18 @@ const mutations = {
   },
   currentUser (state, currentUser) {
     state.currentUser = currentUser
-  }
+  },
+  busy (state) {
+    state.loading++
+  },
+  free (state) {
+    state.loading--
+  },
 }
 
 const actions = {
   async updateUsers ({ commit }) {
+    commit('busy')
     const users = await getUsers()
     commit('users',
       users.map(data =>
@@ -48,9 +56,11 @@ const actions = {
         )
       )
     )
+    commit('free')
   },
 
   async updateActivities ({ commit }) {
+    commit('busy')
     const activities = await getActivities()
     commit('activities',
       activities.map(data =>
@@ -63,9 +73,11 @@ const actions = {
         )
       )
     )
+    commit('free')
   },
 
   async updateExpenseSubmissions ({ commit, getters }) {
+    commit('busy')
     const expenseSubmissions = await getExpenseSubmissions()
     commit('expenseSubmissions',
       expenseSubmissions.map(data =>
@@ -89,6 +101,7 @@ const actions = {
       )
     )
     commit('currentUser', getters.users[0])
+    commit('free')
   }
 }
 
@@ -99,7 +112,8 @@ const getters = {
   activities: state => state.activities,
   users: state => state.users,
   user: state => id => state.users.find(element => element.id === id),
-  currentUser: state => state.currentUser
+  currentUser: state => state.currentUser,
+  loading: state => state.loading
 }
 
 export default new Vuex.Store({
