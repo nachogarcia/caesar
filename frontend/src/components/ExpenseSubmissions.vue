@@ -44,11 +44,13 @@
         </template>
       </b-table>
     </b-row>
-    <div
-      class="text-primary text-center"
-      @click="createExpenseSubmission"
-    >
-      <icon name="plus-circle" scale="4" />
+    <div class="text-center">
+      <b-button
+        @click="createExpenseSubmission"
+        variant="link"
+      >
+        <icon name="plus-circle" scale="4" />
+      </b-button>
     </div>
   </b-container>
 </template>

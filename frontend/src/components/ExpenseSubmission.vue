@@ -60,13 +60,13 @@
 
       <b-row>
         <b-col class="text-center">
-          <div
+          <b-button
             v-if="expenseSubmission.state === 'creating' | expenseSubmission.state === 'saved'"
-            class="text-primary"
+            variant="link"
             v-b-modal.addExpenseModal
           >
             <icon name="plus-circle" scale="4" />
-          </div>
+          </b-button>
         </b-col>
       </b-row>
 

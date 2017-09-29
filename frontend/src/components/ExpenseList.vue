@@ -27,13 +27,14 @@
             </b-col>
 
             <b-col cols="2">
-              <span
+              <b-button-close
                 v-if="expenseSubmission.editable"
                 @click="deleteExpense(expense)"
-                class="float-right text-danger"
+                class="float-right"
+                text-variant="danger"
               >
-                <icon name="times-circle" scale="2" />
-              </span>
+                  <icon name="times-circle" scale="2" />
+              </b-button-close>
             </b-col>
           </b-form-row>
 
