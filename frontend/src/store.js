@@ -14,7 +14,7 @@ const state = {
   loading: 0
 }
 
-const mutations = {
+export const mutations = {
   expenseSubmissions (state, expenseSubmissions) {
     state.expenseSubmissions = expenseSubmissions
   },
@@ -62,7 +62,7 @@ export const actions = {
   }
 }
 
-const getters = {
+export const getters = {
   expenseSubmissions: state => state.expenseSubmissions,
   expenseSubmission: state => state.expenseSubmission,
   activity: state => id => state.activities.find(element => element.id === id),

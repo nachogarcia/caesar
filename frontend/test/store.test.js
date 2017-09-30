@@ -8,15 +8,15 @@ const mockUsers = [ 'A user' ]
 const mockExpenseSubmissions = [ 'An expense submission' ]
 const getters = {}
 
-jest.mock('../src/APICallers/ActivityCaller',
+jest.mock('@/APICallers/ActivityCaller',
   () => jest.fn(() => mockActivities)
 )
 
-jest.mock('../src/APICallers/ExpenseSubmissionCaller',
+jest.mock('@/APICallers/ExpenseSubmissionCaller',
   () => jest.fn(() => mockExpenseSubmissions)
 )
 
-jest.mock('../src/APICallers/UserCaller',
+jest.mock('@/APICallers/UserCaller',
   () => jest.fn(() => mockUsers)
 )
 
