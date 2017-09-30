@@ -3,10 +3,6 @@ import Vuex from 'vuex'
 import getActivities from '@/APICallers/ActivityCaller'
 import getUsers from '@/APICallers/UserCaller'
 import getExpenseSubmissions from '@/APICallers/ExpenseSubmissionCaller'
-import User from '@/domain/User'
-import Expense from '@/domain/Expense'
-import ExpenseSubmission from '@/domain/ExpenseSubmission'
-import Activity from '@/domain/Activity'
 
 Vue.use(Vuex)
 
@@ -39,68 +35,29 @@ const mutations = {
   },
   free (state) {
     state.loading--
-  },
+  }
 }
 
-const actions = {
+export const actions = {
   async updateUsers ({ commit }) {
     commit('busy')
     const users = await getUsers()
-    commit('users',
-      users.map(data =>
-        new User(
-          data.id,
-          data.name,
-          data.role,
-          data.active
-        )
-      )
-    )
+    commit('users', users)
+    commit('currentUser', getters.users[0])
     commit('free')
   },
 
   async updateActivities ({ commit }) {
     commit('busy')
     const activities = await getActivities()
-    commit('activities',
-      activities.map(data =>
-        new Activity(
-          data.id,
-          data.name,
-          data.description,
-          data.activitytype,
-          data.is_billable
-        )
-      )
-    )
+    commit('activities', activities)
     commit('free')
   },
 
   async updateExpenseSubmissions ({ commit, getters }) {
     commit('busy')
-    const expenseSubmissions = await getExpenseSubmissions()
-    commit('expenseSubmissions',
-      expenseSubmissions.map(data =>
-        new ExpenseSubmission(
-          data.id,
-          getters.user(data.user_id),
-          data.date,
-          data.concept,
-          data.state,
-          data.expenses.map(expense =>
-            new Expense(
-              expense.id,
-              getters.activity(expense.activity_id),
-              expense.date,
-              expense.concept,
-              expense.amount,
-              expense.modified
-            )
-          )
-        )
-      )
-    )
-    commit('currentUser', getters.users[0])
+    const expenseSubmissions = await getExpenseSubmissions(getters.user, getters.activity)
+    commit('expenseSubmissions', expenseSubmissions)
     commit('free')
   }
 }

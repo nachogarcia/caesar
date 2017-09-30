@@ -1,5 +1,8 @@
-async function getExpenseSubmissions () {
-  return Promise.resolve(
+import Expense from '@/domain/Expense'
+import ExpenseSubmission from '@/domain/ExpenseSubmission'
+
+async function getExpenseSubmissions (findUser, findActivity) {
+  const expenseSubmissions = await Promise.resolve(
     [
       { id: 'e1',
         user_id: 'u1',
@@ -57,6 +60,26 @@ async function getExpenseSubmissions () {
         ]
       }
     ]
+  )
+
+  return expenseSubmissions.map(data =>
+    new ExpenseSubmission(
+      data.id,
+      findUser(data.user_id),
+      data.date,
+      data.concept,
+      data.state,
+      data.expenses.map(expense =>
+        new Expense(
+          expense.id,
+          findActivity(expense.activity_id),
+          expense.date,
+          expense.concept,
+          expense.amount,
+          expense.modified
+        )
+      )
+    )
   )
 }
 

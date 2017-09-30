@@ -72,12 +72,10 @@
         },
         {
           key: 'date',
-          label: 'Date',
           sortable: true,
         },
         {
           key: 'concept',
-          label: 'Concept',
           sortable: true,
         },
         {
@@ -88,7 +86,6 @@
         },
         {
           key: 'status',
-          label: 'Status',
         },
       ]
     }),
@@ -111,10 +108,10 @@
       }
     },
 
-    created () {
-      this.updateUsers()
-      this.updateActivities()
-      this.updateExpenseSubmissions()
+    async created () {
+      await this.updateUsers()
+      await this.updateActivities()
+      await this.updateExpenseSubmissions()
     }
   }
 </script>

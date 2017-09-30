@@ -1,5 +1,7 @@
+import User from '@/domain/User'
+
 async function getUsers () {
-  return Promise.resolve(
+  const users = await Promise.resolve(
     [
       {
         id: 'u1',
@@ -20,6 +22,15 @@ async function getUsers () {
         active: false
       }
     ]
+  )
+
+  return users.map(data =>
+    new User(
+      data.id,
+      data.name,
+      data.role,
+      data.active
+    )
   )
 }
 

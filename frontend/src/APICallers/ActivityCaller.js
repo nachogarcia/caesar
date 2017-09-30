@@ -1,5 +1,7 @@
+import Activity from '@/domain/Activity'
+
 async function getActivities () {
-  return Promise.resolve(
+  const activities = await Promise.resolve(
     [
       {
         id: 'a1',
@@ -30,6 +32,16 @@ async function getActivities () {
         is_billable: true
       }
     ]
+  )
+
+  return activities.map(data =>
+    new Activity(
+      data.id,
+      data.name,
+      data.description,
+      data.activitytype,
+      data.is_billable
+    )
   )
 }
 
