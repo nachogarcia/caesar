@@ -20,7 +20,7 @@ describe('Spinner', () => {
     store.state.loading = 1
     const wrapper = shallow(Spinner, { store })
 
-    expect(wrapper.hasStyle('display', 'none')).toBeFalsy()
+    expect(wrapper.hasStyle('display', 'block')).toBeTruthy()
   })
 
   it('doesnt show when the store is free', () => {
