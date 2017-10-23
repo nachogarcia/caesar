@@ -50,15 +50,17 @@ async function getExpenses (findUser, findActivity, findImage) {
     ]
   )
 
-  return expenses.map(data =>
-    new Expense(
-      data.id,
-      findUser(data.user_id),
-      findActivity(data.activity_id),
-      findImage(data.image_id),
-      data.concept,
-      data.amount,
-      data.status
+  return Promise.all(
+    expenses.map(async data =>
+      new Expense(
+        data.id,
+        findUser(data.user_id),
+        findActivity(data.activity_id),
+        await findImage(data.image_id),
+        data.concept,
+        data.amount,
+        data.status
+      )
     )
   )
 }
