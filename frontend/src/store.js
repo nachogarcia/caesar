@@ -2,24 +2,25 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import getActivities from '@/APICallers/ActivityCaller'
 import getUsers from '@/APICallers/UserCaller'
-import getExpenseSubmissions from '@/APICallers/ExpenseSubmissionCaller'
+import findImage from '@/APICallers/ImageCaller'
+import getExpenses from '@/APICallers/ExpensesCaller'
 
 Vue.use(Vuex)
 
 const state = {
-  expenseSubmissions: [],
-  expenseSubmission: {},
+  expenses: [],
+  selectedExpense: {},
   activities: [],
   users: [],
   loading: 0
 }
 
 export const mutations = {
-  expenseSubmissions (state, expenseSubmissions) {
-    state.expenseSubmissions = expenseSubmissions
+  expenses (state, expenses) {
+    state.expenses = expenses
   },
-  expenseSubmission (state, expenseSubmission) {
-    state.expenseSubmission = expenseSubmission
+  selectedExpense (state, selectedExpense) {
+    state.selectedExpense = selectedExpense
   },
   users (state, users) {
     state.users = users
@@ -39,7 +40,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async updateUsers ({ commit }) {
+  async updateUsers ({ commit, getters }) {
     commit('busy')
     const users = await getUsers()
     commit('users', users)
@@ -54,21 +55,21 @@ export const actions = {
     commit('free')
   },
 
-  async updateExpenseSubmissions ({ commit, getters }) {
+  async updateExpenses ({ commit, getters }) {
     commit('busy')
-    const expenseSubmissions = await getExpenseSubmissions(getters.user, getters.activity)
-    commit('expenseSubmissions', expenseSubmissions)
+    const expenses = await getExpenses(getters.user, getters.activity, findImage)
+    commit('expenses', expenses)
     commit('free')
   }
 }
 
 export const getters = {
-  expenseSubmissions: state => state.expenseSubmissions,
-  expenseSubmission: state => state.expenseSubmission,
+  expenses: state => state.expenses,
+  selectedExpense: state => state.selectedExpense,
   activity: state => id => state.activities.find(element => element.id === id),
+  user: state => id => state.users.find(element => element.id === id),
   activities: state => state.activities,
   users: state => state.users,
-  user: state => id => state.users.find(element => element.id === id),
   currentUser: state => state.currentUser,
   loading: state => state.loading
 }

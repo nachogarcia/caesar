@@ -2,29 +2,12 @@
   <b-modal
     id="addExpenseModal"
     ref="addExpenseModal"
-    title="Add a new Expense"
+    title="Add Expense"
     @ok="handleOk"
     @shown="clearModal"
     lazy
   >
     <b-form @submit.stop.prevent="handleSubmit" validated>
-      <b-form-row>
-        <b-col>
-          <b-form-group
-            horizontal
-            id="expenseDateGroup"
-            label="Date" label-for="expenseDate"
-          >
-            <b-form-input
-              required
-              id="expenseDate"
-              v-model="expense.date"
-              type="date"
-            />
-          </b-form-group>
-        </b-col>
-      </b-form-row>
-
       <b-form-row>
         <b-col>
           <b-form-group
@@ -35,7 +18,7 @@
             <b-form-input
               required
               id="expenseConcept"
-              v-model="expense.concept"
+              v-model="concept"
               placeholder="Concept of the expense"
             />
           </b-form-group>
@@ -52,10 +35,22 @@
             <b-form-select
               required
               id="expenseActivity"
-              v-model="expense.activity"
+              v-model="activity"
               :options="selectActivities()"
               class="mb-3"
             />
+          </b-form-group>
+        </b-col>
+      </b-form-row>
+
+      <b-form-row>
+        <b-col>
+          <b-form-group
+            horizontal
+            id="expenseImageGroup"
+            label="Image" label-for="expenseImage"
+          >
+            <b-form-file id="expenseImage" v-model="image" required />
           </b-form-group>
         </b-col>
       </b-form-row>
@@ -69,7 +64,7 @@
             <b-form-input
               required
               id="expenseAmount"
-              v-model="expense.amount"
+              v-model="amount"
               placeholder="0.00"
               step="0.01"
               min="0.01"
@@ -79,7 +74,7 @@
         </b-col>
 
         <b-col cols="3">
-          <b-badge v-if="expense.activity.billable" variant="success">Billable</b-badge>
+          <b-badge v-if="activity.billable" variant="success">Billable</b-badge>
           <b-badge v-else variant="secondary">Not Billable</b-badge>
         </b-col>
       </b-form-row>
@@ -95,11 +90,15 @@
     name: 'AddExpenseModal',
 
     data: () => ({
-      expense: new Expense('', {}, '', '', 0.00, '')
+      user: {},
+      activity: {},
+      image: {},
+      concept: '',
+      amount: '',
     }),
 
     computed: {
-      ...Vuex.mapGetters(['expenseSubmission', 'activities']),
+      ...Vuex.mapGetters(['activities', 'currentUser']),
     },
 
     methods: {
@@ -110,20 +109,25 @@
       },
 
       clearModal () {
-        this.expense = new Expense('', {}, '', '', 0.00, '')
+        this.user = this.currentUser
+        this.activity = ''
+        this.image = {}
+        this.concept = ''
+        this.amount = ''
+      },
+
+      validExpense () {
+        return this.activity !== '' && this.image !== '' && this.concept != '' && this.amount > 0
       },
 
       handleOk (e) {
         e.preventDefault()
-        if (this.expense.activity == {} ||
-            this.expense.date == '' ||
-            this.expense.concept == '' ||
-            this.expense.amount == 0.00 ) {}
-        else this.handleSubmit()
+        if (this.validExpense()) this.handleSubmit()
       },
 
       handleSubmit () {
-        this.expenseSubmission.expenses.push(this.expense)
+        alert(JSON.stringify([this.user, this.activity, this.image, this.concept, this.amount]))
+        this.clearModal()
         this.$refs.addExpenseModal.hide()
       },
     },

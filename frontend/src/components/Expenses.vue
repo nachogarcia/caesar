@@ -14,30 +14,25 @@
         responsive
         small
         bordered
-        :items="expenseSubmissions"
+        :items="expenses"
         :fields="fields"
         :filter="filter"
-        :sort-by="'date'"
+        :sort-by="'status'"
         :sort-desc=true
         @row-clicked="selectExpense"
         class="pointer"
       >
+        <template slot="billable" scope="data">
+          {{data.item.billable? 'Yes' : 'No'}}
+        </template>
         <template slot="status" scope="data">
           <b-row>
             <b-col md="3">
               <b-badge
-                :variant="data.item.stateVariant"
+                :variant="variantForStatus(data.item.currentStatus)"
                 class="text-capitalize"
               >
-                {{data.item.state}}
-              </b-badge>
-            </b-col>
-            <b-col md="3">
-              <b-badge
-                v-if="data.item.modified"
-                variant="warning"
-              >
-                Modified by reviewer
+                {{data.item.currentStatus}}
               </b-badge>
             </b-col>
           </b-row>
@@ -46,21 +41,30 @@
     </b-row>
     <div class="text-center">
       <b-button
-        @click="createExpenseSubmission"
         variant="link"
+        v-b-modal.addExpenseModal
       >
         <icon name="plus-circle" scale="4" />
       </b-button>
     </div>
+    <AddExpenseModal />
+    <ManageExpenseModal />
   </b-container>
 </template>
 
 <script>
+  import Expense from '@/domain/Expense'
   import * as Vuex from 'vuex'
-  import ExpenseSubmission from '@/domain/ExpenseSubmission'
+  const AddExpenseModal = () => import('@/components/AddExpenseModal')
+  const ManageExpenseModal = () => import('@/components/ManageExpenseModal')
+  import variantForStatus from '@/domain/VariantForStatus'
 
   export default {
-    name: 'ExpenseSubmissions',
+    name: 'Expenses',
+    components: {
+      'AddExpenseModal': AddExpenseModal,
+      'ManageExpenseModal': ManageExpenseModal,
+    },
     data: () => ({
       filter: null,
 
@@ -71,7 +75,8 @@
           sortable: true,
         },
         {
-          key: 'date',
+          key: 'activityName',
+          label: 'Activity',
           sortable: true,
         },
         {
@@ -79,39 +84,40 @@
           sortable: true,
         },
         {
-          key: 'total',
-          label: 'Amount',
+          key: 'amount',
           sortable: true,
           class: 'text-right',
         },
         {
+          key: 'billable',
+          sortable: true,
+        },
+        {
           key: 'status',
+          sortable: true,
         },
       ]
     }),
 
     computed: {
-      ...Vuex.mapGetters(['expenseSubmissions', 'currentUser']),
+      ...Vuex.mapGetters(['expenses', 'currentUser']),
     },
 
     methods: {
-      ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenseSubmissions']),
+      variantForStatus,
 
-      selectExpense (expenseSubmission) {
-        this.$store.commit('expenseSubmission', expenseSubmission)
-        this.$router.push('expenseSubmission')
+      ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenses']),
+
+      selectExpense (expense) {
+        this.$store.commit('selectedExpense', expense)
+        this.$root.$emit('bv::show::modal','manageExpenseModal');
       },
-
-      createExpenseSubmission () {
-        this.$store.commit('expenseSubmission', new ExpenseSubmission(undefined, this.currentUser, '', '', 'creating', []))
-        this.$router.push('expenseSubmission')
-      }
     },
 
     async created () {
       await this.updateUsers()
       await this.updateActivities()
-      await this.updateExpenseSubmissions()
+      await this.updateExpenses()
     }
   }
 </script>

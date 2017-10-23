@@ -1,19 +1,19 @@
-import { actions } from '@/store'
+import { actions, getters } from '@/store'
 import getActivities from '@/APICallers/ActivityCaller'
-import getExpenseSubmissions from '@/APICallers/ExpenseSubmissionCaller'
+import getExpenses from '@/APICallers/ExpensesCaller'
 import getUsers from '@/APICallers/UserCaller'
+import findImage from '@/APICallers/ImageCaller'
 
 const mockActivities = [ 'An activity' ]
 const mockUsers = [ 'A user' ]
-const mockExpenseSubmissions = [ 'An expense submission' ]
-const getters = {}
+const mockExpenses = [ 'An expense' ]
 
 jest.mock('@/APICallers/ActivityCaller',
   () => jest.fn(() => mockActivities)
 )
 
-jest.mock('@/APICallers/ExpenseSubmissionCaller',
-  () => jest.fn(() => mockExpenseSubmissions)
+jest.mock('@/APICallers/ExpensesCaller',
+  () => jest.fn(() => mockExpenses)
 )
 
 jest.mock('@/APICallers/UserCaller',
@@ -42,17 +42,17 @@ describe('Store', () => {
     })
   })
 
-  describe('when updating the Expense Submissions', () => {
+  describe('when updating the Expenses', () => {
     beforeEach(async () => {
-      await actions.updateExpenseSubmissions({ commit, getters })
+      await actions.updateExpenses({ commit, getters, findImage })
     })
 
     it('calls the API', async () => {
-      expect(getExpenseSubmissions).toHaveBeenCalled()
+      expect(getExpenses).toHaveBeenCalled()
     })
 
     it('sets the state', () => {
-      expect(commit).toHaveBeenCalledWith('expenseSubmissions', mockExpenseSubmissions)
+      expect(commit).toHaveBeenCalledWith('expenses', mockExpenses)
     })
 
     it('locks the state', async () => {
@@ -63,7 +63,7 @@ describe('Store', () => {
 
   describe('when updating the users', () => {
     beforeEach(async () => {
-      await actions.updateUsers({ commit })
+      await actions.updateUsers({ commit, getters })
     })
 
     it('calls the API', async () => {

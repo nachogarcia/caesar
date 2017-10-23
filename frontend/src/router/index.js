@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const ExpenseSubmissions = () => import('@/components/ExpenseSubmissions')
-const ExpenseSubmission = () => import('@/components/ExpenseSubmission')
+const Expenses = () => import('@/components/Expenses')
 
 Vue.use(Router)
 
@@ -9,12 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'ExpenseSubmissions',
-      component: ExpenseSubmissions
+      name: 'Expenses',
+      component: Expenses
     },
-    {
-      path: '/ExpenseSubmission',
-      component: ExpenseSubmission
-    }
   ]
 })
