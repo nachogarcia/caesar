@@ -5,14 +5,21 @@
     title="Expense"
     lazy
   >
-    <b-img thumbnail fluid v-bind:src="selectedExpense.image" alt="Expense Image" />
-    <p>
-    {{selectedExpense.userName}}
-    {{selectedExpense.activityName}}
-    {{selectedExpense.concept}}
-    {{selectedExpense.amount}}
-    {{selectedExpense.billable}}
-    </p>
+    <b-img
+      thumbnail
+      fluid
+      center
+      v-bind:src="selectedExpense.image"
+      alt="Expense Image"
+    />
+
+    <dl class="row">
+      <dt class="col-sm-3">User</dt><dd class="col-sm-9">{{selectedExpense.userName}}</dd>
+      <dt class="col-sm-3">Activity</dt><dd class="col-sm-9">{{selectedExpense.activityName}}</dd>
+      <dt class="col-sm-3">Concept</dt><dd class="col-sm-9">{{selectedExpense.concept}}</dd>
+      <dt class="col-sm-3">Amount</dt><dd class="col-sm-9">{{selectedExpense.amount}}</dd>
+      <dt class="col-sm-3">Billable</dt><dd class="col-sm-9">{{selectedExpense.billable}}</dd>
+    </dl>
 
     <template slot="modal-footer">
       <b-btn
@@ -24,16 +31,16 @@
 
       <b-btn
         v-show="currentUser.reviewer && selectedExpense.isToAcceptOrReject"
-        variant="primary"
+        variant="danger"
       >
-        Accept
+        Reject
       </b-btn>
 
       <b-btn
         v-show="currentUser.reviewer && selectedExpense.isToAcceptOrReject"
-        variant="danger"
+        variant="primary"
       >
-        Reject
+        Accept
       </b-btn>
 
       <b-btn

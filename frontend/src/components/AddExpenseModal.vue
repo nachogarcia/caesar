@@ -13,7 +13,8 @@
           <b-form-group
             horizontal
             id="expenseConceptGroup"
-            label="Concept" label-for="expenseConcept"
+            label="Concept"
+            label-for="expenseConcept"
           >
             <b-form-input
               required
@@ -30,7 +31,8 @@
           <b-form-group
             horizontal
             id="expenseActivityGroup"
-            label="Activity" label-for="expenseActivity"
+            label="Activity"
+            label-for="expenseActivity"
           >
             <b-form-select
               required
@@ -39,6 +41,8 @@
               :options="selectActivities()"
               class="mb-3"
             />
+            <b-badge v-if="activity.billable" variant="success">Billable</b-badge>
+            <b-badge v-else variant="secondary">Not Billable</b-badge>
           </b-form-group>
         </b-col>
       </b-form-row>
@@ -48,7 +52,8 @@
           <b-form-group
             horizontal
             id="expenseImageGroup"
-            label="Image" label-for="expenseImage"
+            label="Image"
+            label-for="expenseImage"
           >
             <b-form-file id="expenseImage" v-model="image" required />
           </b-form-group>
@@ -57,25 +62,27 @@
 
       <b-form-row>
         <b-col>
-          <b-input-group>
-            <b-input-group-addon>
-              <icon name="money" />
-            </b-input-group-addon>
-            <b-form-input
-              required
-              id="expenseAmount"
-              v-model="amount"
-              placeholder="0.00"
-              step="0.01"
-              min="0.01"
-              type="number"
-            />
-          </b-input-group>
-        </b-col>
-
-        <b-col cols="3">
-          <b-badge v-if="activity.billable" variant="success">Billable</b-badge>
-          <b-badge v-else variant="secondary">Not Billable</b-badge>
+          <b-form-group
+            horizontal
+            id="expenseAmountGroup"
+            label="Amount"
+            label-for="expenseAmount"
+          >
+            <b-input-group>
+              <b-input-group-addon>
+                <icon name="money" />
+              </b-input-group-addon>
+              <b-form-input
+                required
+                id="expenseAmount"
+                v-model="amount"
+                placeholder="0.00"
+                step="0.01"
+                min="0.01"
+                type="number"
+              />
+            </b-input-group>
+          </b-form-group>
         </b-col>
       </b-form-row>
     </b-form>
