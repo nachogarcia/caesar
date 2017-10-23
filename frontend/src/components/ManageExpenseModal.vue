@@ -5,13 +5,15 @@
     title="Expense"
     lazy
   >
-    <b-img
-      thumbnail
-      fluid
-      center
-      v-bind:src="selectedExpense.image"
-      alt="Expense Image"
-    />
+    <a :href="selectedExpense.image" target="_blank">
+      <b-img
+        thumbnail
+        fluid
+        center
+        v-bind:src="selectedExpense.image"
+        alt="Expense Image"
+      />
+    </a>
 
     <dl class="row">
       <dt class="col-sm-3">User</dt><dd class="col-sm-9">{{selectedExpense.userName}}</dd>
