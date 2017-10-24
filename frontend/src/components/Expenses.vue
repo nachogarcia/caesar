@@ -109,8 +109,10 @@
 
       ...Vuex.mapActions(['updateUsers', 'updateActivities', 'updateExpenses']),
 
+      ...Vuex.mapMutations(['selectedExpense']),
+
       selectExpense (expense) {
-        this.$store.commit('selectedExpense', expense)
+        this.selectedExpense(expense)
         this.$root.$emit('bv::show::modal','manageExpenseModal');
       },
     },
