@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import { state, mutations, getters } from '@/store'
 import Expenses from '@/components/Expenses'
 
-import Expense from '@/domain/Activity'
+import Expense from '@/domain/Expense'
 import User from '@/domain/User'
 import Activity from '@/domain/Activity'
 
@@ -47,6 +47,17 @@ describe('Expenses', () => {
     const files = wrapper.find('tbody').findAll('tr')
 
     expect(files.length).toEqual(expenses.length)
+
+    const expense = expenses[0]
+    const columns = files.at(0).findAll('td')
+
+    expect(columns.at(0).text()).toEqual(expense.userName)
+    expect(columns.at(1).text()).toEqual(expense.activityName)
+    expect(columns.at(2).text()).toEqual(expense.concept)
+    expect(columns.at(3).text()).toEqual(expense.amount.toString())
+    const yesOrNo = isTrue => isTrue ? 'Yes' : 'No'
+    expect(columns.at(4).text()).toContain(yesOrNo(expense.billable))
+    expect(columns.at(5).text()).toContain(expense.currentStatus)
   })
 
   it('adds expenses', () => {
