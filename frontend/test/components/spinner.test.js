@@ -1,10 +1,7 @@
 import { shallow } from 'vue-test-utils'
-import Vue from 'vue'
 import Vuex from 'vuex'
-import Spinner from '@/components/Spinner'
 import { getters } from '@/store'
-
-Vue.config.ignoredElements = ['icon']
+import Spinner from '@/components/Spinner'
 
 describe('Spinner', () => {
   let store

@@ -41,6 +41,7 @@
     </b-row>
     <div class="text-center">
       <b-button
+        id="addExpense"
         variant="link"
         v-b-modal.addExpenseModal
       >
@@ -55,9 +56,9 @@
 <script>
   import Expense from '@/domain/Expense'
   import * as Vuex from 'vuex'
-  const AddExpenseModal = () => import('@/components/AddExpenseModal')
-  const ManageExpenseModal = () => import('@/components/ManageExpenseModal')
   import variantForStatus from '@/domain/VariantForStatus'
+  import AddExpenseModal from '@/components/AddExpenseModal'
+  import ManageExpenseModal from '@/components/ManageExpenseModal'
 
   export default {
     name: 'Expenses',

@@ -7,11 +7,12 @@ import getExpenses from '@/APICallers/ExpensesCaller'
 
 Vue.use(Vuex)
 
-const state = {
+export const state = {
   expenses: [],
   selectedExpense: {},
   activities: [],
   users: [],
+  currentUser: {},
   loading: 0
 }
 
