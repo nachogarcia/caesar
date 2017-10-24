@@ -10,7 +10,7 @@ import Activity from '@/domain/Activity'
 
 const expenses = [
   new Expense('expenseId1', new User('userId1', 'userName1', ['role1'], true), new Activity('activityId1', 'activityName', 'daily', true), 'an image', 'a concept', 100, { submitted: '2017-04-01' }),
-  new Expense('expenseId2', new User('userId2', 'userName2', ['role2'], true), new Activity('activityId2', 'activityName', 'daily', true), 'an image', 'a concept', 39, { submitted: '2016-03-21' }),
+  new Expense('expenseId2', new User('userId2', 'userName2', ['role2'], true), new Activity('activityId2', 'activityName', 'daily', true), 'an image', 'a concept', 39, { submitted: '2016-03-21' })
 ]
 
 const actions = {
@@ -18,7 +18,6 @@ const actions = {
   updateActivities: jest.fn(() => Promise.resolve()),
   updateExpenses: jest.fn(() => Promise.resolve())
 }
-
 
 describe('Expenses', () => {
   let store
@@ -41,7 +40,7 @@ describe('Expenses', () => {
     expect(actions.updateExpenses).toHaveBeenCalled()
   })
 
-  it('shows Expenses', () => {
+  it('renders Expenses', () => {
     store.state.expenses = expenses
     const wrapper = shallow(Expenses, { store })
     const files = wrapper.find('tbody').findAll('tr')
@@ -60,7 +59,7 @@ describe('Expenses', () => {
     expect(columns.at(5).text()).toContain(expense.currentStatus)
   })
 
-  it('adds expenses', () => {
+  it('adds new expenses', () => {
     const wrapper = shallow(Expenses, { store })
     const button = wrapper.find('#addExpense')
     button.trigger('click')
@@ -68,7 +67,7 @@ describe('Expenses', () => {
     expect(wrapper.emitted()['bv::show::modal'][0]).toContain('addExpenseModal')
   })
 
-  it('shows expenses', () => {
+  it('shows expenses in detail', () => {
     const wrapper = shallow(Expenses, { store })
     const file = wrapper.find('tbody').find('tr')
     file.trigger('click')
