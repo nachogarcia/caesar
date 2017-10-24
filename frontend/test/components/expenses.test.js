@@ -33,10 +33,9 @@ describe('Expenses', () => {
 
   it('updates the store on creation', async () => {
     const wrapper = shallow(Expenses, { store })
+    await Vue.nextTick()
     expect(actions.updateUsers).toHaveBeenCalled()
-    await Vue.nextTick()
     expect(actions.updateActivities).toHaveBeenCalled()
-    await Vue.nextTick()
     expect(actions.updateExpenses).toHaveBeenCalled()
   })
 
