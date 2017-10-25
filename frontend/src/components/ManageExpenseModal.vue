@@ -20,7 +20,7 @@
       <dt class="col-sm-3">Activity</dt><dd class="col-sm-9">{{selectedExpense.activityName}}</dd>
       <dt class="col-sm-3">Concept</dt><dd class="col-sm-9">{{selectedExpense.concept}}</dd>
       <dt class="col-sm-3">Amount</dt><dd class="col-sm-9">{{selectedExpense.amount}}</dd>
-      <dt class="col-sm-3">Billable</dt><dd class="col-sm-9">{{selectedExpense.billable}}</dd>
+      <dt class="col-sm-3">Billable</dt><dd class="col-sm-9">{{selectedExpense.billable? 'Yes': 'No'}}</dd>
     </dl>
 
     <template slot="modal-footer">

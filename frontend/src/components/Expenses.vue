@@ -113,7 +113,7 @@
 
       selectExpense (expense) {
         this.selectedExpense(expense)
-        this.$root.$emit('bv::show::modal','manageExpenseModal');
+        this.$root.$emit('bv::show::modal','manageExpenseModal')
       },
     },
 
