@@ -45,4 +45,34 @@ describe('Expenses', () => {
     const yesOrNo = isTrue => isTrue ? 'Yes' : 'No'
     expect(details.at(4).text()).toEqual(yesOrNo(selectedExpense.billable))
   })
+
+  describe('when the current user is a reviewer', () => {
+    const currentUser = new User('userId1', 'userName1', ['expense-approver'], true)
+
+    it('shows accept and reject buttons', async () => {
+      store.state.currentUser = currentUser
+
+      const wrapper = shallow(ManageExpenseModal, { store })
+      wrapper.vm.$emit('bv::show::modal','manageExpenseModal')
+      await Vue.nextTick()
+
+      const buttons = wrapper.findAll('button')
+      expect(buttons.at(1).text()).toContain('Close')
+      expect(buttons.at(2).text()).toContain('Reject')
+      expect(buttons.at(3).text()).toContain('Accept')
+    })
+
+    it('shows pay button', async () => {
+      store.state.currentUser = currentUser
+
+      const wrapper = shallow(ManageExpenseModal, { store })
+      wrapper.vm.$emit('bv::show::modal','manageExpenseModal')
+      await Vue.nextTick()
+
+      const buttons = wrapper.findAll('button')
+      expect(buttons.at(1).text()).toContain('Close')
+      expect(buttons.at(2).text()).toContain('Reject')
+      expect(buttons.at(3).text()).toContain('Accept')
+    })
+  })
 })
