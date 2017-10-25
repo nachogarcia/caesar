@@ -38,27 +38,27 @@ const actions = {
 
 describe('Expenses', () => {
   let store
+  let wrapper
 
-  beforeEach(() => {
+  beforeEach(async () => {
     store = new Vuex.Store({
       state,
       mutations,
       actions,
       getters
     })
+    store.state.expenses = expenses
+    wrapper = shallow(Expenses, { store })
+    await Vue.nextTick()
   })
 
   it('updates the store on creation', async () => {
-    const wrapper = shallow(Expenses, { store })
-    await Vue.nextTick()
     expect(actions.updateUsers).toHaveBeenCalled()
     expect(actions.updateActivities).toHaveBeenCalled()
     expect(actions.updateExpenses).toHaveBeenCalled()
   })
 
   it('renders Expenses', () => {
-    store.state.expenses = expenses
-    const wrapper = shallow(Expenses, { store })
     const files = wrapper.find('tbody').findAll('tr')
 
     expect(files.length).toEqual(expenses.length)
@@ -76,16 +76,16 @@ describe('Expenses', () => {
   })
 
   it('adds new expenses', () => {
-    const wrapper = shallow(Expenses, { store })
     const button = wrapper.find('#addExpense')
+
     button.trigger('click')
 
     expect(wrapper.emitted()['bv::show::modal'][0]).toContain('addExpenseModal')
   })
 
   it('shows expenses in detail', () => {
-    const wrapper = shallow(Expenses, { store })
     const file = wrapper.find('tbody').find('tr')
+
     file.trigger('click')
 
     expect(wrapper.emitted()['bv::show::modal'][0]).toContain('manageExpenseModal')

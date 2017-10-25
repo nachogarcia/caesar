@@ -27,6 +27,7 @@ const actions = {
 
 describe('Expenses', () => {
   let store
+  let wrapper
 
   beforeEach(() => {
     store = new Vuex.Store({
@@ -35,12 +36,12 @@ describe('Expenses', () => {
       actions,
       getters
     })
+    wrapper = shallow(ManageExpenseModal, { store })
+    wrapper.vm.$emit('bv::show::modal', 'manageExpenseModal')
   })
 
   it('renders the expense', async () => {
     store.state.selectedExpense = selectedExpense
-    const wrapper = shallow(ManageExpenseModal, { store })
-    wrapper.vm.$emit('bv::show::modal','manageExpenseModal')
     await Vue.nextTick()
 
     const image = wrapper.find('img')
@@ -60,9 +61,6 @@ describe('Expenses', () => {
 
     it('shows accept and reject buttons', async () => {
       store.state.currentUser = currentUser
-
-      const wrapper = shallow(ManageExpenseModal, { store })
-      wrapper.vm.$emit('bv::show::modal','manageExpenseModal')
       await Vue.nextTick()
 
       const buttons = wrapper.findAll('button')
@@ -73,9 +71,6 @@ describe('Expenses', () => {
 
     it('shows pay button', async () => {
       store.state.currentUser = currentUser
-
-      const wrapper = shallow(ManageExpenseModal, { store })
-      wrapper.vm.$emit('bv::show::modal','manageExpenseModal')
       await Vue.nextTick()
 
       const buttons = wrapper.findAll('button')
