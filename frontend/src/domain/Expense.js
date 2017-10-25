@@ -10,7 +10,7 @@ export default class Expense {
   }
 
   get billable () {
-    return this.activity && this.activity.billable
+    return this.activity.billable
   }
 
   get userName () {
@@ -22,17 +22,14 @@ export default class Expense {
   }
 
   get currentStatus () {
-    if (this.status.payed) return 'payed'
-    if (this.status.accepted) return 'accepted'
-    if (this.status.rejected) return 'rejected'
-    if (this.status.submitted) return 'submitted'
+    return this.status.currentStatus
   }
 
   get isToAcceptOrReject () {
-    return !(this.status.accepted || this.status.rejected || this.status.payed)
+    return this.status.isToAcceptOrReject
   }
 
   get isToPay () {
-    return this.status.accepted && !this.status.payed
+    return this.status.isToPay
   }
 }

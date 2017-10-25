@@ -7,10 +7,27 @@ import Expenses from '@/components/Expenses'
 import Expense from '@/domain/Expense'
 import User from '@/domain/User'
 import Activity from '@/domain/Activity'
+import Status from '@/domain/Status'
 
 const expenses = [
-  new Expense('expenseId1', new User('userId1', 'userName1', ['role1'], true), new Activity('activityId1', 'activityName', 'daily', true), 'an image', 'a concept', 100, { submitted: '2017-04-01' }),
-  new Expense('expenseId2', new User('userId2', 'userName2', ['role2'], true), new Activity('activityId2', 'activityName', 'daily', true), 'an image', 'a concept', 39, { submitted: '2016-03-21' })
+  new Expense(
+    'expenseId1',
+    new User('userId1', 'userName1', ['role1'], true),
+    new Activity('activityId1', 'activityName', 'daily', true),
+    'an image',
+    'a concept',
+    100,
+    new Status({ submitted: '2017-04-01' })
+  ),
+  new Expense(
+    'expenseId2',
+    new User('userId2', 'userName2', ['role2'], true),
+    new Activity('activityId2', 'activityName', 'daily', true),
+    'an image',
+    'a concept',
+    39,
+    new Status({ submitted: '2016-03-21' })
+  )
 ]
 
 const actions = {

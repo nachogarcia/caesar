@@ -1,4 +1,5 @@
 import Expense from '@/domain/Expense'
+import Status from '@/domain/Status'
 
 async function getExpenses (findUser, findActivity, findImage) {
   const expenses = await Promise.resolve(
@@ -59,7 +60,7 @@ async function getExpenses (findUser, findActivity, findImage) {
         await findImage(data.image_id),
         data.concept,
         data.amount,
-        data.status
+        new Status(data.status)
       )
     )
   )

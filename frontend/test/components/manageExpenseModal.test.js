@@ -7,8 +7,17 @@ import ManageExpenseModal from '@/components/ManageExpenseModal'
 import Expense from '@/domain/Expense'
 import User from '@/domain/User'
 import Activity from '@/domain/Activity'
+import Status from '@/domain/Status'
 
-const selectedExpense = new Expense('expenseId1', new User('userId1', 'userName1', ['role1'], true), new Activity('activityId1', 'activityName', 'daily', true), 'an image', 'a concept', 100, { submitted: '2017-04-01' })
+const selectedExpense = new Expense(
+  'expenseId1',
+  new User('userId1', 'userName1', ['role1'], true),
+  new Activity('activityId1', 'activityName', 'daily', true),
+  'an image',
+  'a concept',
+  100,
+  new Status({ submitted: '2017-04-01' })
+)
 
 const actions = {
   updateUsers: jest.fn(() => Promise.resolve()),
